@@ -1,0 +1,111 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*{
+  font-family: "Yekan";
+}
+
+.clip-polygon {
+  clip-path: polygon(0 68%, 100% 34%, 100% 100%, 0 100%);
+  background: linear-gradient(269.55deg, #06846f 0.35%, #54bee8 103.4%);
+}
+
+.outlet {
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  text-align: center;
+}
+
+.nav {
+  position: absolute;
+  top: 80px;
+  left: 80px;
+  right: 80px;
+}
+/* layer base {
+  @font-face {
+      font-family: 'Yekan';
+      src:	url('Yekan.eot'); 
+      src:	url('Yekan.eot?#iefix') format('embedded-opentype'), 
+          url('Yekan.woff2') format('woff2'), 
+          url('Yekan.woff') format('woff'), 
+          url('Yekan.otf') format('opentype'), 
+          url('Yekan.ttf') format('truetype');
+      font-weight: normal;
+      font-style: normal;
+      text-rendering: optimizeLegibility;
+      font-display: auto;
+
+  }
+}; */
+
+.sec_div {
+  width: 800px;
+  height: 509px;
+  padding: 24px 24px 32px 24px;
+  border-radius: 20px;
+}
+
+.div3_h2 {
+  font-size: 32px;
+  line-height: 45.09px;
+}
+
+.div3_btn {
+  height: 32px;
+  width: 32px;
+}
+
+.div4 {
+  width: 752px;
+  height: 376px;
+  padding: 20px;
+}
+.div4_p {
+  font-size: 16px;
+  font-weight: 400;
+}
+.div4_li {
+  font-size: 16px;
+  font-weight: 400;
+}
+
+/* .clip-polygon {
+  clip-path: polygon(0 68%, 100% 34%, 100% 100%, 0 100%);
+  background: linear-gradient(269.55deg, #06846f 0.35%, #54bee8 103.4%);
+}
+
+.outlet {
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  text-align: center;
+}
+
+.nav {
+  position: absolute;
+  top: 80px;
+  left: 80px;
+  right: 80px;
+} */
+
+@font-face {
+      font-family: 'Yekan';
+      src:	url('./yekan font/Yekan.eot'); 
+      src:	url('./yekan font/Yekan.eot?#iefix') format('embedded-opentype'), 
+          url('./yekan font/Yekan.woff2') format('woff2'), 
+          url('./yekan font/Yekan.woff') format('woff'), 
+          url('./yekan font/Yekan.otf') format('opentype'), 
+          url('./yekan font/Yekan.ttf') format('truetype');
+      font-weight: normal;
+      font-style: normal;
+      text-rendering: optimizeLegibility;
+      font-display: auto;
+
+  }
