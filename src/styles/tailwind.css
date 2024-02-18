@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-*{
+* {
   font-family: "Yekan";
 }
 
@@ -21,6 +21,7 @@
 }
 
 .nav {
+  z-index: 1;
   position: absolute;
   top: 80px;
   left: 80px;
@@ -74,38 +75,16 @@
   font-weight: 400;
 }
 
-/* .clip-polygon {
-  clip-path: polygon(0 68%, 100% 34%, 100% 100%, 0 100%);
-  background: linear-gradient(269.55deg, #06846f 0.35%, #54bee8 103.4%);
-}
-
-.outlet {
-  position: absolute;
-  top: 60%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 1;
-  text-align: center;
-}
-
-.nav {
-  position: absolute;
-  top: 80px;
-  left: 80px;
-  right: 80px;
-} */
-
 @font-face {
-      font-family: 'Yekan';
-      src:	url('./yekan font/Yekan.eot'); 
-      src:	url('./yekan font/Yekan.eot?#iefix') format('embedded-opentype'), 
-          url('./yekan font/Yekan.woff2') format('woff2'), 
-          url('./yekan font/Yekan.woff') format('woff'), 
-          url('./yekan font/Yekan.otf') format('opentype'), 
-          url('./yekan font/Yekan.ttf') format('truetype');
-      font-weight: normal;
-      font-style: normal;
-      text-rendering: optimizeLegibility;
-      font-display: auto;
-
-  }
+  font-family: "Yekan";
+  src: url("./yekan font/Yekan.eot");
+  src: url("./yekan font/Yekan.eot?#iefix") format("embedded-opentype"),
+    url("./yekan font/Yekan.woff2") format("woff2"),
+    url("./yekan font/Yekan.woff") format("woff"),
+    url("./yekan font/Yekan.otf") format("opentype"),
+    url("./yekan font/Yekan.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  text-rendering: optimizeLegibility;
+  font-display: auto;
+}

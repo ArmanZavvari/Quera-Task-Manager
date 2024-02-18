@@ -6,8 +6,7 @@ import Register from "./components/register/register";
 import Forgot from "./components/forgot/forgot";
 import Forgotmsg from "./components/forgotmsg/forgotmsg";
 import Changepsw from "./components/changepsw/changepsw";
-import TermsComponent from "./components/terms page";
-
+import CustomModal from "./components/common/modal";
 
 export default function App() {
   return (
@@ -21,7 +20,6 @@ export default function App() {
           <Route path="forgot" element={<Forgot />} />
           <Route path="forgotmsg" element={<Forgotmsg />} />
           <Route path="changepsw" element={<Changepsw />} />
-          <Route path="termsComponent" element={<TermsComponent />} />
         </Route>
       </Routes>
     </Router>
