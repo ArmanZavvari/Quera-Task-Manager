@@ -1,11 +1,11 @@
 import { Outlet } from "react-router-dom";
-import Navbar from "../../navbar/navbar";
+import Navbarlogin from "../../navbar/navbarlogin";
 
-function AuthLayout() {
+function AuthLayout2() {
   return (
     <div>
       <div className="nav">
-        <Navbar />
+        <Navbarlogin />
       </div>
       <div className="relative z-0">
         <div className=" transform rotate-177 h-screen"></div>
@@ -17,4 +17,4 @@ function AuthLayout() {
     </div>
   );
 }
-export default AuthLayout;
+export default AuthLayout2;

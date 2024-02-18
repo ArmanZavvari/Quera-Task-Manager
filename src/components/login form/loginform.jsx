@@ -41,7 +41,7 @@ const LoginForm = () => {
           </div>
           <div className="mb-3 text-right">
             <a
-              href="#"
+              href="http://localhost:3000/forgot"
               className="font-medium text-xs leading-17 hover:underline"
             >
               رمز عبور خود را فراموش کرده اید ؟
@@ -55,7 +55,7 @@ const LoginForm = () => {
           </button>
           <div className="flex justify-center items-center">
             <a
-              href="#"
+              href="http://localhost:3000/register"
               className="text-teal-500 mr-2 text-base leading-tight hover:text-green-600"
             >
               ثبت نام
