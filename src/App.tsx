@@ -7,6 +7,7 @@ import Forgot from "./components/forgot/forgot";
 import Forgotmsg from "./components/forgotmsg/forgotmsg";
 import Changepsw from "./components/changepsw/changepsw";
 
+
 export default function App() {
   return (
     <Router>
@@ -19,6 +20,7 @@ export default function App() {
           <Route path="forgot" element={<Forgot />} />
           <Route path="forgotmsg" element={<Forgotmsg />} />
           <Route path="changepsw" element={<Changepsw />} />
+          <Route path="m" element={<MyComponent />} />
         </Route>
       </Routes>
     </Router>

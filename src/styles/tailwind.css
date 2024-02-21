@@ -88,3 +88,47 @@
   text-rendering: optimizeLegibility;
   font-display: auto;
 }
+
+.rbc-toolbar-label {
+  padding: 0 10px;
+  flex-grow: 0 !important;
+}
+.rbc-toolbar {
+  display: flex;
+  justify-content: flex-start;
+}
+.rbc-off-range-bg {
+  /* background-color: #ffffff; */
+  z-index: -2;
+}
+.rbc-date-cell a {
+  color: black;
+  z-index: 6;
+}
+.rbc-day-bg + .rbc-day-bg {
+  border: none;
+}
+.rbc-day-bg {
+  /* background-color: #ffffff; */
+  z-index: -2;
+}
+.rbc-date-cell {
+  text-align: unset;
+  height: 20px;
+}
+.rbc-today {
+  background-color: #ffffff;
+}
+.rbc-now a {
+  border: 1px solid blue;
+  padding: 5px;
+  border-radius: 25px;
+  font-weight: 100;
+}
+.cal_list {
+  background-color: #f7f8f9;
+}
+.cal {
+  width: 936px;
+  height: 632px;
+}
