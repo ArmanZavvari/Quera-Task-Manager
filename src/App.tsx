@@ -6,8 +6,7 @@ import Register from "./components/register/register";
 import Forgot from "./components/forgot/forgot";
 import Forgotmsg from "./components/forgotmsg/forgotmsg";
 import Changepsw from "./components/changepsw/changepsw";
-import CustomModal from "./components/common/modal";
-import MyComponent from "./components/calendar/calendar";
+
 
 export default function App() {
   return (
