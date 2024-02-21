@@ -1,8 +1,17 @@
 import React, { useState } from "react";
 import CustomModal from "../common/modal";
+import { useForm } from "react-hook-form";
 
 const Register = () => {
   const [modalOpen, setModalOpen] = useState(false);
+
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
+  const onSubmit = (data) => console.log(data);
 
   const handleCloseModal = () => {
     setModalOpen(false);
@@ -16,7 +25,7 @@ const Register = () => {
               {" "}
               ثبت‌نام در کوئرا تسک منیجر{" "}
             </h2>
-            <form>
+            <form onSubmit={handleSubmit(onSubmit)}>
               <div className="mb-2">
                 <label
                   htmlFor="username"
@@ -30,6 +39,7 @@ const Register = () => {
                   name="username"
                   className="w-full px-4 py-1  border rounded-lg"
                   required
+                  {...register("username")}
                 />
               </div>
               <div className="mb-2">
@@ -45,6 +55,7 @@ const Register = () => {
                   name="email"
                   className="w-full px-4 py-1 border rounded-lg"
                   required
+                  {...register("email")}
                 />
               </div>
               <div className="mb-2">
@@ -60,6 +71,7 @@ const Register = () => {
                   name="password"
                   className="w-full px-4 py-1 border rounded-lg"
                   required
+                  {...register("password")}
                 />
               </div>
               <div className="flex justify-end items-center mb-2">
@@ -82,6 +94,7 @@ const Register = () => {
                   name="rules"
                   className="w-5 h-5 rounded border border-gray-400 text-gray-600"
                   required
+                  {...register("checkbox")}
                 />
               </div>
               <button
