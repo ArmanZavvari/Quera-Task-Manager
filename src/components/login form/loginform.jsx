@@ -1,6 +1,15 @@
 import React from "react";
+import { useForm } from "react-hook-form";
 
 const LoginForm = () => {
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
+  const onSubmit = (data) => console.log(data);
+
   return (
     <div className="relative z-10 flex justify-center items-center ">
       <div className="bg-white rounded-lg p-8 shadow-md w-[640px] h-429 ">
@@ -8,7 +17,7 @@ const LoginForm = () => {
           {" "}
           (: به کوئرا تسک منیجر خوش برگشتی{" "}
         </h2>
-        <form>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <div className="mb-4">
             <label
               htmlFor="username"
@@ -22,6 +31,7 @@ const LoginForm = () => {
               name="username"
               className="w-full px-4 py-1 mb-2 border rounded-lg"
               required
+              {...register("username")}
             />
           </div>
           <div className="mb-2">
@@ -37,6 +47,7 @@ const LoginForm = () => {
               name="password"
               className="w-full px-4 py-1 border rounded-lg"
               required
+              {...register("password")}
             />
           </div>
           <div className="mb-3 text-right">
