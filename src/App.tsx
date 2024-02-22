@@ -7,21 +7,23 @@ import Forgot from "./components/forgot/forgot";
 import Forgotmsg from "./components/forgotmsg/forgotmsg";
 import Changepsw from "./components/changepsw/changepsw";
 import CustomModal from "./components/common/modal";
+import Card from "./components/task/task";
 
 export default function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<AuthLayout />}>
-          <Route path="login" element={<LoginForm />} />
-        </Route>
-        <Route path="/" element={<AuthLayout2 />}>
-          <Route path="register" element={<Register />} />
-          <Route path="forgot" element={<Forgot />} />
-          <Route path="forgotmsg" element={<Forgotmsg />} />
-          <Route path="changepsw" element={<Changepsw />} />
-        </Route>
-      </Routes>
-    </Router>
+    // <Router>
+    //   <Routes>
+    //     <Route path="/" element={<AuthLayout />}>
+    //       <Route path="login" element={<LoginForm />} />
+    //     </Route>
+    //     <Route path="/" element={<AuthLayout2 />}>
+    //       <Route path="register" element={<Register />} />
+    //       <Route path="forgot" element={<Forgot />} />
+    //       <Route path="forgotmsg" element={<Forgotmsg />} />
+    //       <Route path="changepsw" element={<Changepsw />} />
+    //     </Route>
+    //   </Routes>
+    // </Router>
+    <Card/>
   );
 }
