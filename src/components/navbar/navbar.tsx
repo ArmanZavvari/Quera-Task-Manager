@@ -1,13 +1,22 @@
-import React from "react";
-// import { Link } from "react-router-dom";
-// import "../../styles/yekan font/yekan";
+import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
+
 const Navbar = () => {
+  const [btnText, setBtnText] = useState("ثبت نام ");
+
+  useEffect(() => {
+    if (currentUrl.pathname === "/login") {
+      setBtnText("ورود");
+    }
+  }, []);
+  const currentUrl = useLocation();
+
   return (
     <div className="flex items-center justify-between ">
       <ul className="flex items-center">
         <li>
           <button className="bg-teal-500  text-white hover:bg-green-600 w-24 h-10 rounded-md p-2 mr-1">
-            ثبت نام
+            {btnText}
           </button>
         </li>
         <li>

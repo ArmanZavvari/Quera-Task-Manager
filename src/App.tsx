@@ -1,29 +1,26 @@
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
-import AuthLayout from "./components/layout/authLayout.tsx/AuthLayout";
-import AuthLayout2 from "./components/layout/authLayout2/AuthLayout2";
-import LoginForm from "./components/login form/loginform";
-import Register from "./components/register/register";
+import Changepsw from "./components/changepsw/changepsw";
 import Forgot from "./components/forgot/forgot";
 import Forgotmsg from "./components/forgotmsg/forgotmsg";
-import Changepsw from "./components/changepsw/changepsw";
-import CustomModal from "./components/common/modal";
-import Card from "./components/task/task";
+import AuthLayout from "./components/layout/authLayout.tsx/AuthLayout";
+import LoginForm from "./components/login form/loginform";
+import Register from "./components/register/register";
+
+
 
 export default function App() {
   return (
-    // <Router>
-    //   <Routes>
-    //     <Route path="/" element={<AuthLayout />}>
-    //       <Route path="login" element={<LoginForm />} />
-    //     </Route>
-    //     <Route path="/" element={<AuthLayout2 />}>
-    //       <Route path="register" element={<Register />} />
-    //       <Route path="forgot" element={<Forgot />} />
-    //       <Route path="forgotmsg" element={<Forgotmsg />} />
-    //       <Route path="changepsw" element={<Changepsw />} />
-    //     </Route>
-    //   </Routes>
-    // </Router>
-    <Card/>
+    <Router>
+      <Routes>
+        <Route path="/" element={<AuthLayout />}>
+          <Route path="login" element={<LoginForm />} />
+          <Route path="register" element={<Register />} />
+          <Route path="forgot" element={<Forgot />} />
+          <Route path="forgotmsg" element={<Forgotmsg />} />
+          <Route path="changepsw" element={<Changepsw />} />
+        </Route>
+      </Routes>
+    </Router>
+
   );
 }
