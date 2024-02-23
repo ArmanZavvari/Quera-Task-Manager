@@ -24,7 +24,9 @@ const Card = () => {
         className="w-[257px] h-[134px] rounded-md"
       />
       <div className='flex flex-col text-right py-2 space-y-2 '>
-        <p>اسم لیست</p>یز
+
+        <p>اسم لیست</p>
+
         <p>.این یک تیتر برای این تسک است</p>
         <div className='flex items-center justify-end '>
             {icons.check_round_square("#C9CBDA","16px")}
