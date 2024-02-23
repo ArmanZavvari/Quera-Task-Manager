@@ -6,8 +6,6 @@ import AuthLayout from "./components/layout/authLayout.tsx/AuthLayout";
 import LoginForm from "./components/login form/loginform";
 import Register from "./components/register/register";
 
-
-
 export default function App() {
   return (
     <Router>
@@ -24,3 +22,7 @@ export default function App() {
 
   );
 }
+
+
+
+
