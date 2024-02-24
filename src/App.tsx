@@ -6,6 +6,7 @@ import AuthLayout from "./components/layout/authLayout.tsx/AuthLayout";
 import LoginForm from "./components/login form/loginform";
 import Register from "./components/register/register";
 import Dashboard from "./components/layout/dashboard/dashboard";
+import Card from "./components/task/task";
 
 export default function App() {
   return (
@@ -19,7 +20,7 @@ export default function App() {
           <Route path="changepsw" element={<Changepsw />} />
         </Route>
         <Route path="/dashboard" element={<Dashboard />}>
-          {/* <Route path="profile" element={<LoginForm />} /> */}
+          <Route path="task" element={<Card />} />
         </Route>
         <Route path="/profile" element={<Dashboard />}>
           {/* <Route path="login" element={<LoginForm />} /> */}
