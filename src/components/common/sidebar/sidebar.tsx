@@ -1,17 +1,18 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import Dashsidebar from "./dash sidebar/dashsidebar";
 import Profilesidebar from "./profile sidebar/profilesidebar";
 import icons from "../../../utils/icons/icons";
 
-const routeComponents: Record<string, React.FC> = {
-  "/dashh": Dashsidebar,
-  "/dash": Profilesidebar,
-};
-
 const SmartSidebar: React.FC = () => {
-  const location = useLocation();
-  const PageComponent = routeComponents[location.pathname];
+  const [side, setSide] = useState("dashboard");
+
+  useEffect(() => {
+    if (currentUrl.pathname === "/profile") {
+      setSide("profile");
+    }
+  }, []);
+  const currentUrl = useLocation();
 
   return (
     <div
@@ -23,24 +24,26 @@ const SmartSidebar: React.FC = () => {
           کوئرا تسک منیجر
         </h1>
         <div className="self-end my-10">
-          {PageComponent && <PageComponent />}
+          {side === "dashboard" ? <Dashsidebar /> : <Profilesidebar />}
         </div>
       </div>
-      <div>
+      {side === "dashboard" && (
         <div>
-          <button className="flex justify-start items-center gap-1 mb-5 mr-2">
-            <span className="sq1"></span>
-            <p>نیلوفر</p>
-          </button>
+          <div>
+            <button className="flex justify-start items-center gap-1 mb-5 mr-2">
+              <span className="sq1"></span>
+              <p>نیلوفر</p>
+            </button>
+          </div>
+          <div className="flex justify-between">
+            <button className="flex justify-center items-center gap-1 bg-white p-1 px-2 rounded-md text-gray-500">
+              {icons.door("#818181", "20px")}
+              خروج
+            </button>
+            <button>{icons.sun("gray", "20px")}</button>
+          </div>
         </div>
-        <div className="flex justify-between">
-          <button className="flex justify-center items-center gap-1 bg-white p-1 px-2 rounded-md text-gray-500">
-            {icons.door("#818181", "20px")}
-            خروج
-          </button>
-          <button>{icons.sun("gray", "20px")}</button>
-        </div>
-      </div>
+      )}
     </div>
   );
 };

@@ -1,5 +1,6 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import SmartSidebar from "../../common/sidebar/sidebar";
+import { useEffect, useState } from "react";
 
 const Dashboard = () => {
   return (
