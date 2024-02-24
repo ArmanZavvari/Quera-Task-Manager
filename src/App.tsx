@@ -18,8 +18,11 @@ export default function App() {
           <Route path="forgotmsg" element={<Forgotmsg />} />
           <Route path="changepsw" element={<Changepsw />} />
         </Route>
-        <Route path="/dash" element={<Dashboard />}>
-          <Route path="login" element={<LoginForm />} />
+        <Route path="/dashboard" element={<Dashboard />}>
+          {/* <Route path="profile" element={<LoginForm />} /> */}
+        </Route>
+        <Route path="/profile" element={<Dashboard />}>
+          {/* <Route path="login" element={<LoginForm />} /> */}
         </Route>
       </Routes>
     </Router>
