@@ -5,6 +5,7 @@ import Forgotmsg from "./components/forgotmsg/forgotmsg";
 import AuthLayout from "./components/layout/authLayout.tsx/AuthLayout";
 import LoginForm from "./components/login form/loginform";
 import Register from "./components/register/register";
+import Dashboard from "./components/layout/dashboard/dashboard";
 
 export default function App() {
   return (
@@ -16,6 +17,9 @@ export default function App() {
           <Route path="forgot" element={<Forgot />} />
           <Route path="forgotmsg" element={<Forgotmsg />} />
           <Route path="changepsw" element={<Changepsw />} />
+        </Route>
+        <Route path="/dash" element={<Dashboard />}>
+          <Route path="login" element={<LoginForm />} />
         </Route>
       </Routes>
     </Router>
