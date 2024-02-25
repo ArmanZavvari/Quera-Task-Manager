@@ -1,3 +1,4 @@
+
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import Changepsw from "./components/changepsw/changepsw";
 import Forgot from "./components/forgot/forgot";
@@ -29,3 +30,4 @@ export default function App() {
     </Router>
   );
 }
+
