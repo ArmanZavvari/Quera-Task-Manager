@@ -132,3 +132,83 @@
   width: 936px;
   height: 632px;
 }
+.custom-file-input {
+  display: inline-block;
+  padding: 0.5em 1em;
+  color: #208d8e;
+  cursor: pointer;
+  border: 2px solid #208d8e;
+  border-radius: 5px;
+}
+
+.custom-file-input:hover {
+  background-color: #208d8e;
+  color: white;
+}
+.p-i-b {
+  color: white;
+  background-color: #208d8e;
+  border-radius: 6px;
+  font-size: 14px;
+  padding: 8px 0;
+}
+.profile-box {
+  width: 20px;
+  height: 20px;
+  margin-left: 10px;
+  cursor: pointer;
+  transition: box-shadow 0.3s ease;
+  border-radius: 40%;
+}
+
+.profile-box:hover {
+  box-shadow: 0 0 0 2px var(--border-color);
+  color: white !important;
+}
+
+.red {
+  --border-color: #fa5252;
+}
+
+.pink {
+  --border-color: #e64980;
+}
+
+.grape {
+  --border-color: #be4bdb;
+}
+
+.violet {
+  --border-color: #7950f2;
+}
+
+.indigo {
+  --border-color: #4c6ed5;
+}
+
+.blue {
+  --border-color: #228be6;
+}
+.brand {
+  --border-color: #208d8e;
+}
+
+.green {
+  --border-color: #40c057;
+}
+.lime {
+  --border-color: #82c91e;
+}
+
+.yellow {
+  --border-color: #fab005;
+}
+.orange {
+  --border-color: #fd7e14;
+}
+.cyan {
+  --border-color: #15aabf;
+}
+.teal {
+  --border-color: #12b886;
+}
