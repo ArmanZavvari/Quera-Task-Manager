@@ -10,6 +10,7 @@ import Card from "./components/task/task";
 import ProfileForm from "./components/profilePage/profile-information/profileInfo";
 import ProfileSettings from "./components/profilePage/profileSetting/profilesetting";
 import PersonalInf from "./components/profilePage/personal-information/personalinf";
+import Calendar from "./components/dashboardCalendar/dashboardCalendar";
 
 export default function App() {
   return (
@@ -24,6 +25,7 @@ export default function App() {
         </Route>
         <Route path="/dashboard" element={<Dashboard />}>
           <Route path="task" element={<Card />} />
+          <Route path="calendar" element={<Calendar />} />
         </Route>
         <Route path="/profile" element={<Dashboard />}>
           <Route path="info/account" element={<ProfileForm />} />
