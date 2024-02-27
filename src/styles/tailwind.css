@@ -212,7 +212,7 @@
 }
 .teal {
   --border-color: #12b886;
-=======
+}
 .sq1 {
   width: 15px;
   height: 15px;
@@ -307,5 +307,4 @@
 }
 .si-title {
   color: linear-gradient(to right, #118c80, #4ab7d8);
-
 }
