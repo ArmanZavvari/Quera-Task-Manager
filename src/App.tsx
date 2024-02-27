@@ -17,20 +17,20 @@ export default function App() {
     <Router>
       <Routes>
         <Route path="/" element={<AuthLayout />}>
-          <Route path="login" element={<LoginForm />} />
+          <Route path="/" element={<LoginForm />} />
           <Route path="register" element={<Register />} />
           <Route path="forgot" element={<Forgot />} />
           <Route path="forgotmsg" element={<Forgotmsg />} />
           <Route path="changepsw" element={<Changepsw />} />
         </Route>
         <Route path="/dashboard" element={<Dashboard />}>
-          <Route path="task" element={<Card />} />
+          <Route path="/dashboard" element={<Card />} />
           <Route path="calendar" element={<Calendar />} />
         </Route>
         <Route path="/profile" element={<Dashboard />}>
+          <Route path="/profile" element={<PersonalInf />} />
           <Route path="info/account" element={<ProfileForm />} />
           <Route path="settings" element={<ProfileSettings />} />
-          <Route path="info/personal" element={<PersonalInf />} />
         </Route>
       </Routes>
     </Router>
