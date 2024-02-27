@@ -1,3 +1,4 @@
+
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import Changepsw from "./components/changepsw/changepsw";
 import Forgot from "./components/forgot/forgot";
@@ -6,6 +7,7 @@ import AuthLayout from "./components/layout/authLayout.tsx/AuthLayout";
 import LoginForm from "./components/login form/loginform";
 import Register from "./components/register/register";
 import Dashboard from "./components/layout/dashboard/dashboard";
+import Card from "./components/task/task";
 
 export default function App() {
   return (
@@ -18,8 +20,11 @@ export default function App() {
           <Route path="forgotmsg" element={<Forgotmsg />} />
           <Route path="changepsw" element={<Changepsw />} />
         </Route>
-        <Route path="/dash" element={<Dashboard />}>
-          <Route path="login" element={<LoginForm />} />
+        <Route path="/dashboard" element={<Dashboard />}>
+          <Route path="task" element={<Card />} />
+        </Route>
+        <Route path="/profile" element={<Dashboard />}>
+          {/* <Route path="login" element={<LoginForm />} /> */}
         </Route>
       </Routes>
     </Router>
