@@ -1,32 +1,46 @@
-
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import Changepsw from "./components/changepsw/changepsw";
 import Forgot from "./components/forgot/forgot";
 import Forgotmsg from "./components/forgotmsg/forgotmsg";
 import AuthLayout from "./components/layout/authLayout.tsx/AuthLayout";
-import LoginForm from "./components/login form/loginform";
+import LoginForm from "./components/loginForm/loginform";
 import Register from "./components/register/register";
 import Dashboard from "./components/layout/dashboard/dashboard";
 import Card from "./components/task/task";
+
 import Filter from "./components/filter/filter";
+
+import ProfileForm from "./components/profilePage/profile-information/profileInfo";
+import ProfileSettings from "./components/profilePage/profileSetting/profilesetting";
+import PersonalInf from "./components/profilePage/personal-information/personalinf";
+import Calendar from "./components/dashboardCalendar/dashboardCalendar";
+import WorkSpaces from "./components/workSpaces/workSpaces";
+
 
 export default function App() {
   return (
     <Router>
       <Routes>
         <Route path="/" element={<AuthLayout />}>
-          <Route path="login" element={<LoginForm />} />
+          <Route path="/" element={<LoginForm />} />
           <Route path="register" element={<Register />} />
           <Route path="forgot" element={<Forgot />} />
           <Route path="forgotmsg" element={<Forgotmsg />} /> 
-          /<Route path="changepsw" element={<Changepsw/>} />
+          <Route path="changepsw" element={<Changepsw/>} />
           <Route path="filter" element={<Filter />} />
         </Route>
         <Route path="/dashboard" element={<Dashboard />}>
-          <Route path="task" element={<Card />} />
+          <Route path="/dashboard" element={<Card />} />
+          <Route path="calendar" element={<Calendar />} />
+          <Route path="workspaces" element={<WorkSpaces />} />
         </Route>
         <Route path="/profile" element={<Dashboard />}>
+
           <Route path="login" element={<LoginForm />} /> 
+          <Route path="/profile" element={<PersonalInf />} />
+          <Route path="info/account" element={<ProfileForm />} />
+          <Route path="settings" element={<ProfileSettings />} />
+
         </Route>
       </Routes>
     </Router>
@@ -36,7 +50,8 @@ export default function App() {
 
 
 
-////////////////////////////////////////////////////////////////
+
+
 // for filter component : 
 // const App = () => {
 //   const tasks = [
@@ -91,3 +106,4 @@ export default function App() {
 //     </div>
 //   );
 // };
+
