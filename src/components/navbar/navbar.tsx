@@ -25,7 +25,7 @@ const Navbar = () => {
           </p>
         </li>
       </ul>
-      <h1 className="text-transparent bg-clip-text bg-gradient-to-r from-teal-500 to-blue-500  font-extrabold text-2xl leading-[45.09px]">
+      <h1 className="text-transparent bg-clip-text bg-gradient-to-r from-teal-600 to-sky-400  font-extrabold text-2xl leading-[45.09px]">
         کوئرا تسک منیجر
       </h1>
     </div>
