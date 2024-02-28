@@ -8,8 +8,8 @@ interface ProfileProps {
 
 const ProfilePicture: React.FC<ProfileProps> = ({
   image,
-  firstName,
-  lastName,
+  firstName = "A",
+  lastName = "B",
 }) => {
   if (image) {
     return (
@@ -40,7 +40,7 @@ const ProfilePicture: React.FC<ProfileProps> = ({
   return (
     <div className="flex items-center justify-center">
       <div
-        className={`w-[36px] h-[36px] flex items-center justify-center rounded-full ${backgroundColor}`}
+        className={`w-[100px] h-[100px] flex items-center justify-center rounded-full ${backgroundColor}`}
       >
         <span className="text-white text-sm font-bold flex justify-center items-center">
           <p>{firstName.charAt(0)}</p>
