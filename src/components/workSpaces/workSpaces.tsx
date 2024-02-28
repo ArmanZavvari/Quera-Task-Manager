@@ -4,7 +4,7 @@ import icons from "../../utils/icons/icons";
 const handleClickBut = () => {
   console.log("sup");
 };
-const Butt: React.FC = () => {
+const WorkSpaces: React.FC = () => {
   return (
     <div className="mr-7 mt-8">
       <div className="border-b-2 border-gray-100 pb-8">
@@ -138,4 +138,4 @@ const Butt: React.FC = () => {
     </div>
   );
 };
-export default Butt;
+export default WorkSpaces;
