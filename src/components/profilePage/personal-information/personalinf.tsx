@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import ProfilePicture from "../../common/profilePicture/profilePicture";
 
 const PersonalInf: React.FC = () => {
   const [profileData, setProfileData] = useState({
@@ -32,7 +33,7 @@ const PersonalInf: React.FC = () => {
       </h2>
       <div className="flex items-center gap-x-2 justify-start">
         <div>
-          <p className="w-[100px] h-[100px] border">کامپوننت عکس</p>
+          <ProfilePicture lastName="A" firstName="B" />
         </div>
         <div className="flex flex-col items-center justify-center gap-y-4">
           <div>
