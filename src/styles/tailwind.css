@@ -367,3 +367,15 @@
   color: #208d8e;
   border-radius: 4px;
 }
+.button-nws {
+  background-color: #208d8e;
+  color: white;
+  border-radius: 6px;
+  font-weight: 800;
+}
+.button-nws:hover {
+  border: 2px solid #208d8e;
+  background-color: white;
+  color: #208d8e;
+  border-radius: 6px;
+}
