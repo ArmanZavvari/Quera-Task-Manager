@@ -86,13 +86,3 @@ export default function App() {
     </Router>
   );
 }
-
-// for filter component :
-// const App = () => {
-
-//   return (
-//     <div>
-//       <Filter tasks={tasks} />
-//     </div>
-//   );
-// };
