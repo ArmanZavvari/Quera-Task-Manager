@@ -18,35 +18,35 @@ const ListComponent = () => {
           <p className="text-base leading-6 text-right">این یک تیتر برای این تسک است.</p>
         </div>
         <div className="flex items-center justify-between w-[493px]">
-          <ProfilePicture className="w-[40px] h-[40px]">
-          </ProfilePicture>
-          {/* <ProfilePicture className="w-[40px] h-[40px]">
-          </ProfilePicture> */}
+        <div className="flex relative">
+            <ProfilePicture  className="w-24 h-24 rounded-full border border-gray-300"/>
+            <ProfilePicture  className="w-24 h-24 rounded-full border border-gray-300 absolute top-0 left-12" />
+          </div>
           <p>{formattedDate}</p>
           <span>{icons.flag("red", "20px")}</span>
           <span className="ml-5">{icons.paragraph("#BDC0C6", "20px")}</span>
         </div>
       </div>
-      <div className="flex items-center justify-between rounded-md bg-slate-100  h-[47px] mt-10 ">
+
+      <div className="flex items-center justify-between rounded-md bg-slate-100  h-[47px] mt-5 ">
         <div className="flex items-center w-[493px]">
           <span className="w-4 h-4 rounded bg-pink-500"></span>
           <p className="text-base leading-6 text-right">این یک تیتر برای این تسک است.</p>
         </div>
         <div className="flex items-center justify-between w-[493px]">
-          <ProfilePicture className="w-[40px] h-[40px]">
-          </ProfilePicture>
-          {/* <ProfilePicture className="w-[40px] h-[40px]">
-          </ProfilePicture> */}
+        <div className="flex relative">
+            <ProfilePicture  className="w-[40px] h-[40px] my-10 z-1 absolute left-0 top-0"/>
+          </div>
           <p>{formattedDate}</p>
           <span>{icons.flag("red", "20px")}</span>
           <span className="ml-5">{icons.paragraph("#BDC0C6", "20px")}</span>
         </div>
       </div>
+
       <div className="flex items-center mt-20">
           {icons.chevron_down_circle("#323232","20px")}
           <button className="bg-pink-500 text-white border rounded-md py-1 px-3">pending</button>
       </div>
-
     </div>
   );
 };
@@ -54,3 +54,18 @@ const ListComponent = () => {
 export default ListComponent;
 
 
+
+
+
+// import React from 'react';
+
+// const ListComponent = () => {
+//   return (
+//     <div className="relative">
+//       <img src='./' alt="عکس پروفایل 1" className="w-24 h-24 rounded-full border border-gray-300" />
+//       <img src='' alt="عکس پروفایل 2" className="w-24 h-24 rounded-full border border-gray-300 absolute top-0 left-12" />
+//     </div>
+//   );
+// };
+
+// export default ListComponent;
