@@ -14,6 +14,8 @@
     "@types/react-dom": "^18.2.19",
     "jalali-moment": "^3.3.11",
     "jalali-react-big-calendar": "^0.19.5",
+    "jalaliday": "^2.3.0",
+    "moment-jalaali": "^0.10.0",
     "react": "^18.2.0",
     "react-big-calendar": "^1.10.2",
     "react-datepicker": "^6.1.0",

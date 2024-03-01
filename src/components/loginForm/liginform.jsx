@@ -1,3 +1,6 @@
+<<<<<<< HEAD:src/components/login form/loginform.jsx
+import React from "react";
+=======
 import { useForm } from "react-hook-form";
 
 const LoginForm = () => {
@@ -8,74 +11,16 @@ const LoginForm = () => {
     formState: { errors },
   } = useForm();
   const onSubmit = (data) => console.log(data);
+>>>>>>> f0401c67f8b9488e8c55d81fa5d561592edee0ac:src/components/loginForm/liginform.jsx
 
+const ListComponent = () => {
   return (
-    <div className="relative z-10 flex justify-center items-center ">
-      <div className="bg-white rounded-lg p-8 shadow-md w-[640px] h-429 ">
-        <h2 className="text-2xl font-bold mb-6 text-center">
-          {" "}
-          (: به کوئرا تسک منیجر خوش برگشتی{" "}
-        </h2>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="mb-4">
-            <label
-              htmlFor="username"
-              className="block text-base leading-5 font-normal text-right mb-2"
-            >
-              نام کاربری
-            </label>
-            <input
-              type="text"
-              id="username"
-              name="username"
-              className="w-full px-4 py-1 mb-2 border rounded-lg"
-              required
-              {...register("username")}
-            />
-          </div>
-          <div className="mb-2">
-            <label
-              htmlFor="password"
-              className="block text-base leading-5 font-normal text-right mb-2"
-            >
-              رمز عبور
-            </label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              className="w-full px-4 py-1 border rounded-lg"
-              required
-              {...register("password")}
-            />
-          </div>
-          <div className="mb-3 text-right">
-            <a
-              href="http://localhost:3000/forgot"
-              className="font-medium text-xs leading-17 hover:underline"
-            >
-              رمز عبور خود را فراموش کرده اید ؟
-            </a>
-          </div>
-          <button
-            type="submit"
-            className="w-full bg-teal-500  text-white my-4 hover:bg-green-600 font-bold py-2 px-4 rounded"
-          >
-            ورود
-          </button>
-          <div className="flex justify-center items-center">
-            <a
-              href="http://localhost:3000/register"
-              className="text-teal-500 mr-2 text-base leading-tight hover:text-green-600"
-            >
-              ثبت نام
-            </a>
-            <p className="text-base leading-tight">ثبت نام نکرده ای ؟</p>
-          </div>
-        </form>
-      </div>
+    <div className="flex">
+      <div className="inline-block w-16 h-16 rounded-md bg-pink-500">sccscscsc</div>
+
+      <p>این یک تیتر برای این تسک است</p>
     </div>
   );
 };
 
-export default LoginForm;
+export default ListComponent;
