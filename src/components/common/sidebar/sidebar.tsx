@@ -17,7 +17,7 @@ const SmartSidebar: React.FC = () => {
   return (
     <div
       dir="rtl"
-      className="flex flex-col justify-between item-center bg-white p-4 border-l-2 h-[100vh]"
+      className="flex flex-col justify-between item-center bg-white p-4 border-l-2 absolute top-0 overflow-scroll w-[340px] h-[100vh]"
     >
       <div className="flex flex-col">
         <h1 className="text-transparent bg-clip-text bg-gradient-to-r from-teal-600 to-sky-400  font-extrabold text-4xl leading-[45.09px] text-center mt-5">

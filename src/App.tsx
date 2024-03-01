@@ -3,18 +3,16 @@ import Changepsw from "./components/changepsw/changepsw";
 import Forgot from "./components/forgot/forgot";
 import Forgotmsg from "./components/forgotmsg/forgotmsg";
 import AuthLayout from "./components/layout/authLayout.tsx/AuthLayout";
-import LoginForm from "./components/loginForm/loginform";
 import Register from "./components/register/register";
 import Dashboard from "./components/layout/dashboard/dashboard";
 import Card from "./components/task/task";
-
-import Filter from "./components/filter/filter";
-
-import ProfileForm from "./components/profilePage/profile-information/profileInfo";
-import ProfileSettings from "./components/profilePage/profileSetting/profilesetting";
-import PersonalInf from "./components/profilePage/personal-information/personalinf";
 import Calendar from "./components/dashboardCalendar/dashboardCalendar";
 import WorkSpaces from "./components/workSpaces/workSpaces";
+import PersonalInf from "./components/profilePage/personal-information/personalinf";
+import ProfileForm from "./components/profilePage/profile-information/profileInfo";
+import ProfileSettings from "./components/profilePage/profileSetting/profilesetting";
+import Filter from "./components/filter/filter";
+import LoginForm from "./components/loginForm/liginform";
 
 export default function App() {
   const tasks = [
