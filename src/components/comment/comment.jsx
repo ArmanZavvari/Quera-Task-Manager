@@ -1,15 +1,15 @@
-import React, { useState } from 'react';
-import icons from '../../utils/icons/icons'
+import { useState } from "react";
+import icons from "../../utils/icons/icons";
 
 const CommentTextarea = () => {
-  const [comment, setComment] = useState('');
+  const [comment, setComment] = useState("");
 
   const handleTextareaChange = (e) => {
     setComment(e.target.value);
   };
 
   const handleSendComment = () => {
-    console.log('Comment sent:', comment);
+    console.log("Comment sent:", comment);
   };
 
   return (
@@ -19,9 +19,8 @@ const CommentTextarea = () => {
         placeholder="کامنت شما"
         value={comment}
         onChange={handleTextareaChange}
-
       />
-     <div className='flex items-center justify-between'>
+      <div className="flex items-center justify-between">
         <div>
           <button
             className="bottom-2 right-2 px-3 py-2 bg-teal-500 text-white rounded-md"
@@ -30,13 +29,13 @@ const CommentTextarea = () => {
             ثبت کامنت
           </button>
         </div>
-        <div className='flex items-center'>
-        <button className='mx-1'>{icons.emoji("#C9CBDA","24px")} </button>
-        <button className='mx-1'>{icons.paper("#C9CBDA","24px")} </button>
-        <button className='mx-1'>{icons.attach("#C9CBDA","24px")} </button>
-        <button className='mx-1'>{icons.email("#C9CBDA","24px")} </button>
+        <div className="flex items-center">
+          <button className="mx-1">{icons.emoji("#C9CBDA", "24px")} </button>
+          <button className="mx-1">{icons.paper("#C9CBDA", "24px")} </button>
+          <button className="mx-1">{icons.attach("#C9CBDA", "24px")} </button>
+          <button className="mx-1">{icons.email("#C9CBDA", "24px")} </button>
         </div>
-     </div>     
+      </div>
     </div>
   );
 };

@@ -5,7 +5,7 @@ import BigCalendar from "jalali-react-big-calendar";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import moment from "moment";
 
-const MyComponent = () => {
+const CalendarModal = () => {
   const [isCalendarOpen, setIsCalendarOpen] = useState(true);
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
@@ -198,4 +198,4 @@ const MyComponent = () => {
   );
 };
 
-export default MyComponent;
+export default CalendarModal;

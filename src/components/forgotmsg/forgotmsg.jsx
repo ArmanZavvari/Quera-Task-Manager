@@ -1,5 +1,3 @@
-import React from "react";
-
 const Forgotmsg = () => {
   return (
     <div className="relative z-10 flex justify-center items-center ">
@@ -9,9 +7,8 @@ const Forgotmsg = () => {
           فراموشی رمز عبور{" "}
         </h2>
         <p className="font-normal text-sm leading-5 text-center">
-        لینک تغییر رمز عبور برای شما ایمیل شد. لطفا ایمیل خود را بررسی کنید.
+          لینک تغییر رمز عبور برای شما ایمیل شد. لطفا ایمیل خود را بررسی کنید.
         </p>
-        
       </div>
     </div>
   );

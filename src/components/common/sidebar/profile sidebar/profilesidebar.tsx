@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import icons from "../../../../utils/icons/icons";
 const Profilesidebar: React.FC = () => {
   return (

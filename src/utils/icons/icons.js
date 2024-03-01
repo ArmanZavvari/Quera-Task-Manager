@@ -47,6 +47,32 @@ const icons = {
       </svg>
     );
   },
+  refresh: (color, size) => {
+    return (
+      <svg
+        width={size}
+        height={size}
+        viewBox="0 0 20 20"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M12.125 18.0585C15.7 17.1168 18.3333 13.8668 18.3333 10.0001C18.3333 5.40014 14.6333 1.66681 10 1.66681C4.44167 1.66681 1.66667 6.30014 1.66667 6.30014M1.66667 6.30014V2.50014M1.66667 6.30014H3.34167H5.36667"
+          stroke={color}
+          stroke-width="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+        <path
+          d="M1.66667 10.0001C1.66667 14.6001 5.4 18.3335 10 18.3335"
+          stroke={color}
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-dasharray="3 3"
+        />
+      </svg>
+    );
+  },
   moon: (color, size) => {
     return (
       <svg
