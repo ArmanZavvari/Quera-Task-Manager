@@ -4,9 +4,16 @@ import NameWorkSpace from "./nameWorkSpace/nameWorkSpace";
 import ColorWorkSpace from "./colorWorkSpace/colorWorkSpace";
 import SummaryModal from "./infoWorkSpace/infoWorkSpace";
 
-const NewWorkSpace: React.FC = () => {
+interface NewWorkSpaceProps {
+  modalOpen?: boolean;
+  handleClose(): void;
+}
+
+const NewWorkSpace: React.FC<NewWorkSpaceProps> = ({
+  modalOpen,
+  handleClose,
+}) => {
   const [data, setData] = useState({ name: "", color: "" });
-  const [isOpen, setIsOpen] = useState(true);
   const [step, setStep] = useState(0);
 
   const next = () => {
@@ -17,26 +24,22 @@ const NewWorkSpace: React.FC = () => {
     setStep(step - 1);
   };
 
-  const handleClose = () => {
-    setIsOpen(false);
-  };
-
   const handleSubmit = () => {
     console.log("done");
-    setIsOpen(false);
+    handleClose();
   };
   useEffect(() => {}, [data]);
   const handleOverlayClick = (
     e: React.MouseEvent<HTMLDivElement, MouseEvent>
   ) => {
     if (e.target === e.currentTarget) {
-      setIsOpen(false);
+      handleClose();
     }
   };
 
-  return isOpen ? (
+  return modalOpen ? (
     <div
-      className="fixed inset-0 flex flex-col items-center justify-center bg-gray-800 bg-opacity-60 backdrop-blur-[2px]"
+      className="fixed inset-0 flex flex-col items-center justify-center bg-gray-800 bg-opacity-60 backdrop-blur-[2px] z-10"
       onClick={handleOverlayClick}
     >
       <div className="bg-white py-5 px-10 rounded-xl w-[501px]  flex flex-col justify-between items-stretch">
