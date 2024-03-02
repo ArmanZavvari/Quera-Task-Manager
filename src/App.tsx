@@ -16,6 +16,7 @@ import LoginForm from "./components/loginForm/liginform";
 import ListComponent from "./components/list/list";
 import NewWorkSpace from "./components/common/sidebar/dash sidebar/components/newWorkSpace/newWorkSpace";
 
+
 export default function App() {
   const tasks = [
     {
@@ -78,6 +79,7 @@ export default function App() {
           <Route path="calendar" element={<Calendar />} />
           <Route path="workspaces" element={<WorkSpaces />} />
           <Route path="listview" element={<ListComponent />} />
+          <Route path="boardview" element={<BoardView />} />
         </Route>
         <Route path="/profile" element={<Dashboard />}>
           <Route path="login" element={<LoginForm />} />
