@@ -33,7 +33,12 @@ const PersonalInf: React.FC = () => {
       </h2>
       <div className="flex items-center gap-x-2 justify-start">
         <div>
-          <ProfilePicture lastName="A" firstName="B" />
+          <ProfilePicture
+            lastName="A"
+            firstName="B"
+            imgHeight="100px"
+            imgWidth="100px"
+          />
         </div>
         <div className="flex flex-col items-center justify-center gap-y-4">
           <div>

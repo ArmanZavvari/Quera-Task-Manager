@@ -4,12 +4,16 @@ interface ProfileProps {
   image?: string;
   firstName: string;
   lastName: string;
+  imgWidth?: string;
+  imgHeight: string;
 }
 
 const ProfilePicture: React.FC<ProfileProps> = ({
   image,
   firstName = "A",
   lastName = "B",
+  imgHeight = "100px",
+  imgWidth = "100px",
 }) => {
   if (image) {
     return (
@@ -40,7 +44,7 @@ const ProfilePicture: React.FC<ProfileProps> = ({
   return (
     <div className="flex items-center justify-center">
       <div
-        className={`w-[100px] h-[100px] flex items-center justify-center rounded-full ${backgroundColor}`}
+        className={`w-[${imgWidth}] h-[${imgHeight}] flex items-center justify-center rounded-full ${backgroundColor}`}
       >
         <span className="text-white text-sm font-bold flex justify-center items-center">
           <p>{firstName.charAt(0)}</p>

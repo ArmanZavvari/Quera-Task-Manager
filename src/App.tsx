@@ -13,6 +13,7 @@ import ProfileForm from "./components/profilePage/profile-information/profileInf
 import ProfileSettings from "./components/profilePage/profileSetting/profilesetting";
 import Filter from "./components/filter/filter";
 import LoginForm from "./components/loginForm/liginform";
+import ListComponent from "./components/list/list";
 
 export default function App() {
   const tasks = [
@@ -75,6 +76,7 @@ export default function App() {
           <Route path="/dashboard" element={<Card />} />
           <Route path="calendar" element={<Calendar />} />
           <Route path="workspaces" element={<WorkSpaces />} />
+          <Route path="listview" element={<ListComponent />} />
         </Route>
         <Route path="/profile" element={<Dashboard />}>
           <Route path="login" element={<LoginForm />} />

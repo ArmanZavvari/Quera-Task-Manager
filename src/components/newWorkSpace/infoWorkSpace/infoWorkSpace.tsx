@@ -40,7 +40,12 @@ const SummaryModal: React.FC<Props> = ({ selectedName, selectedColor }) => {
           <div className="flex justify-between items-center">
             <p className="text-sm font-extrabold">اعضا</p>
             <div className="w-5 h-5">
-              <ProfilePicture firstName="نیلوفر" lastName="موجودی" />
+              <ProfilePicture
+                firstName="نیلوفر"
+                lastName="موجودی"
+                imgHeight="100px"
+                imgWidth="100px"
+              />
             </div>
           </div>
         </div>
