@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import icons from "../../../utils/icons/icons";
+import icons from "./../../../../../../../utils/icons/icons";
 
 interface Props {
   onSubmit: (name: string) => void;

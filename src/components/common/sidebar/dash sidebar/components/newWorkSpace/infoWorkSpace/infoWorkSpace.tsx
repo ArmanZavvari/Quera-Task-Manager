@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import icons from "../../../utils/icons/icons";
-import ProfilePicture from "../../common/profilePicture/profilePicture";
+import icons from "./../../../../../../../utils/icons/icons";
+import ProfilePicture from "./../../../../../profilePicture/profilePicture";
 
 interface Props {
   selectedName: string;
