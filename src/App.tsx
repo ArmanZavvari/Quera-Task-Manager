@@ -14,7 +14,8 @@ import ProfileSettings from "./components/profilePage/profileSetting/profilesett
 import Filter from "./components/filter/filter";
 import LoginForm from "./components/loginForm/liginform";
 import ListComponent from "./components/list/list";
-import BoardView from "./components/boardView/boardView";
+import NewWorkSpace from "./components/common/sidebar/dash sidebar/components/newWorkSpace/newWorkSpace";
+
 
 export default function App() {
   const tasks = [
