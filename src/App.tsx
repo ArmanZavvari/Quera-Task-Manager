@@ -74,9 +74,8 @@ export default function App() {
           <Route path="filter" element={<Filter tasks={tasks} />} />
         </Route>
         <Route path="/dashboard" element={<Dashboard />}>
-          <Route path="/dashboard" element={<Card />} />
           <Route path="calendar" element={<Calendar />} />
-          <Route path="workspaces" element={<WorkSpaces />} />
+          <Route path="/dashboard" element={<WorkSpaces />} />
           <Route path="listview" element={<ListComponent />} />
           <Route path="boardview" element={<BoardView />} />
         </Route>
