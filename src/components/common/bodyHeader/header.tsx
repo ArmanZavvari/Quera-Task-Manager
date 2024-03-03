@@ -107,7 +107,7 @@ const BodyHeader = () => {
             </div>
             <div className="flex items-center gap-4">
               <button
-                onClick={() => setFilterOpen(!filterOpen)}
+                onClick={() => setFilterOpen(true)}
                 className="flex gap-4"
               >
                 {icons.filter("#323232", "24px")}
