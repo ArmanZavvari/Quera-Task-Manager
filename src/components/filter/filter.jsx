@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import icons from "../../utils/icons/icons";
 
-const Filter = ({ tasks = [] }) => {
+const Filter = ({ tasks = [], handleFilterClose }) => {
   const [filters, setFilters] = useState([{ id: 1 }]);
   const [filteredTasks, setFilteredTasks] = useState(tasks);
 
@@ -51,7 +51,9 @@ const Filter = ({ tasks = [] }) => {
           فیلتر ها
         </h2>
         <div className="flex justify-center items-center">
-          <button>{icons.close("#323232", "24px")}</button>
+          <button onClick={handleFilterClose}>
+            {icons.close("#323232", "24px")}
+          </button>
         </div>
       </div>
       {filters.map((filter, index) => (

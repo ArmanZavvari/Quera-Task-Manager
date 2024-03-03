@@ -1,4 +1,5 @@
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 
 const LoginForm = () => {
   const {
@@ -51,7 +52,7 @@ const LoginForm = () => {
           </div>
           <div className="mb-3 text-right">
             <a
-              href="http://localhost:3000/forgot"
+              href="/forgot"
               className="font-medium text-xs leading-17 hover:underline"
             >
               رمز عبور خود را فراموش کرده اید ؟
@@ -65,7 +66,7 @@ const LoginForm = () => {
           </button>
           <div className="flex justify-center items-center">
             <a
-              href="http://localhost:3000/register"
+              href="/register"
               className="text-teal-500 mr-2 text-base leading-tight hover:text-green-600"
             >
               ثبت نام
