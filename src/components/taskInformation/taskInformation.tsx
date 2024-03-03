@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import icons from "../../utils/icons/icons";
 import ProfilePicture from "../common/profilePicture/profilePicture";
-import CommentTextarea from "../comment/comment";
+import Comment from "./comment/comment";
 
 const TaskInformation: React.FC = () => {
   return (
@@ -9,7 +9,7 @@ const TaskInformation: React.FC = () => {
       className="fixed inset-0 flex flex-col items-center justify-center bg-gray-800 bg-opacity-60 backdrop-blur-[2px] z-10"
       dir="rtl"
     >
-      <div className="bg-white pt-10 px-3 rounded-xl w-[1352px]  flex flex-col justify-between ">
+      <div className="bg-white pt-10 pr-3 rounded-xl w-[1352px]  flex flex-col justify-between ">
         <div className="flex h-[596px] justify-center w-full relative">
           <div className=" border-l  w-[50%] h-[100%]">
             <div className="flex justify-between items-center pl-4 border-b py-8 pt-16 ">
@@ -61,8 +61,8 @@ const TaskInformation: React.FC = () => {
           </div>
           <div className="w-[50%] h-[100%] flex flex-col justify-between">
             <div>
-              <button className="absolute left-5">
-                {icons.close("gray", "20px")}
+              <button className="absolute left-7 top-[-10px]">
+                {icons.close("#BDBDBD", "24px")}
               </button>
               <div className="flex items-center border-b mt-9">
                 <div className="border-l px-5">
@@ -87,7 +87,7 @@ const TaskInformation: React.FC = () => {
                     imgWidth="36px"
                   />
                 </div>
-                <div className="border rounded-xl p-1 w-full ml-5 pl-12 py-2">
+                <div className="border rounded-xl p-1 w-full ml-10 pl-12 py-2">
                   <div className="flex justify-between items-center">
                     <div className="flex items-center">
                       <p className="text-[#208D8E] text-base font-extrabold mr-2">
@@ -109,8 +109,8 @@ const TaskInformation: React.FC = () => {
                 </div>
               </div>
             </div>
-            <div className="mb-[50px] mr-10" dir="ltr">
-              <CommentTextarea />
+            <div className="mb-[49px]">
+              <Comment />
             </div>
           </div>
         </div>
