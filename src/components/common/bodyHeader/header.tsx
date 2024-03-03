@@ -1,7 +1,10 @@
 import React from "react";
 import icons from "../../../utils/icons/icons";
+import { useNavigate } from "react-router-dom";
 
 const BodyHeader = () => {
+  const navigate = useNavigate();
+
   return (
     <>
       <div className="flex justify-between border-b-[0.5px] border-gray-300 gap-4 py-4 items-center">
@@ -10,15 +13,24 @@ const BodyHeader = () => {
             <h2 className="border-l-[1px] border-gray-600 pl-4 text-right font-extrabold text-xl">
               پروژه اول
             </h2>
-            <button className="flex border-l-[1px]  gap-[5px] border-gray-600 pl-4 text-right">
+            <button
+              onClick={() => navigate("/dashboard/listview")}
+              className="flex border-l-[1px]  gap-[5px] border-gray-600 pl-4 text-right"
+            >
               {icons.list("#323232", "24px")}
               نمایش لیستی
             </button>
-            <button className="flex border-l-[1px] gap-[5px] border-gray-600 pl-4 text-right">
+            <button
+              onClick={() => navigate("/dashboard/boardview")}
+              className="flex border-l-[1px] gap-[5px] border-gray-600 pl-4 text-right"
+            >
               {icons.grid("#323232", "24px")}
               نمایش ستونی
             </button>
-            <button className=" flex border-l-[1px] gap-[5px] border-gray-600 pl-4 text-right">
+            <button
+              onClick={() => navigate("/dashboard/calendar")}
+              className=" flex border-l-[1px] gap-[5px] border-gray-600 pl-4 text-right"
+            >
               {icons.calender_full("#323232", "24px")}
               تقویم
             </button>
