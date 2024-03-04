@@ -71,7 +71,6 @@ function BoardView() {
     // Update the state
     setState(newState);
   }
-
   return (
     <div dir="rtl" className="flex gap-5">
       <DragDropContext onDragEnd={onDragEnd}>
