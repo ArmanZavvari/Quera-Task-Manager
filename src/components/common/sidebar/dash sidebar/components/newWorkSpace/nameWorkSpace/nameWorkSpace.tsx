@@ -19,7 +19,7 @@ const NameWorkSpace: React.FC<Props> = ({ data, setData }) => {
   };
 
   return (
-    <div className="px-4">
+    <div>
       <h5 className="mb-1">نام ورک اسپیس</h5>
       <input
         type="text"
