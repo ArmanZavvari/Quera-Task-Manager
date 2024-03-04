@@ -43,10 +43,7 @@ const Forgot = () => {
             </button>
           </div>
           <div>
-            <a
-              href="http://localhost:3000/login"
-              className="text-teal-500 pt-4"
-            >
+            <a href="/" className="text-teal-500 pt-4">
               بازگشت
             </a>
           </div>
