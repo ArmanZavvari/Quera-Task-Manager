@@ -4,40 +4,32 @@ import icons from "../../../utils/icons/icons";
 interface Option {
   value: string;
   label: string;
-  description: string;
 }
 
 const options: Option[] = [
   {
     value: "Option 1",
-    label: "دسترسی کامل",
-    description:
-      "توانایی ساختن تسک در این پروژه، ویرایش تنظیمات پروژه و حذف پروژه",
+    label: "همه پروژه ها",
   },
   {
     value: "Option 2",
-    label: "دسترسی ویرایش",
-    description:
-      "توانایی ویرایش تسک در این پروژه و ویرایش تنظیمات پروژه. نمی‌تواند پروژه را حذف یا تسک جدید بسازد.",
+    label: "پروژه اول",
   },
   {
     value: "Option 3",
-    label: "دسترسی کامنت",
-    description:
-      "توانایی کامنت گذاشتن دارد. می‌تواند ستون تسک‌ها را تغییر دهد اما توانایی ویرایش تنظیمات پروژه را ندارد.",
+    label: "پروژه دوم",
   },
   {
     value: "Option 4",
-    label: "فقط دسترسی مشاهده",
-    description: "توانایی گذاشتن کامنت یا ویرایش تسک‌ها را ندارد.",
+    label: "پروژه سوم",
   },
 ];
 
-interface SharedSelectorProps {
+interface ProjectSelectorProps {
   onSelect: (value: string) => void;
 }
 
-const SharedSelector: React.FC<SharedSelectorProps> = ({ onSelect }) => {
+const ProjectSelector: React.FC<ProjectSelectorProps> = ({ onSelect }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState<Option | null>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -77,14 +69,14 @@ const SharedSelector: React.FC<SharedSelectorProps> = ({ onSelect }) => {
         onClick={toggleMenu}
         className="border rounded-md py-1 px-2 gap-x-1 text-xs font-normal focus:outline-none flex items-center"
       >
-        {selectedOption ? selectedOption.label : "دسترسی کامل"}
+        {selectedOption ? selectedOption.label : " همه پروژه ها"}
         {isOpen
           ? icons.chevron_right("gray", "20px")
           : icons.chevron_down("gray", "20px")}
       </button>
       {isOpen && (
         <div
-          className="absolute top-full left-0 mt-1 bg-white border rounded-md shadow-md w-[252px] max-h-[200px] overflow-y-auto scroll z-10"
+          className="absolute top-full left-0 mt-1 bg-white border rounded-md shadow-md w-[100px] max-h-[200px] overflow-y-auto scroll z-10"
           ref={menuRef}
         >
           {options.map((option) => (
@@ -94,7 +86,6 @@ const SharedSelector: React.FC<SharedSelectorProps> = ({ onSelect }) => {
               className="p-2 cursor-pointer hover:bg-gray-100 border-b"
             >
               <h5 className="text-xs font-extrabold my-1">{option.label}</h5>
-              <p className="text-xs font-normal">{option.description}</p>
             </div>
           ))}
         </div>
@@ -103,4 +94,4 @@ const SharedSelector: React.FC<SharedSelectorProps> = ({ onSelect }) => {
   );
 };
 
-export default SharedSelector;
+export default ProjectSelector;

@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import icons from "../../../../utils/icons/icons";
 import NewWorkSpace from "./components/newWorkSpace/newWorkSpace";
+import NewProject from "./components/newProject/newProject";
 
 const Dashsidebar: React.FC = () => {
   const [isListVisible, setListVisible] = useState(true);
   const [modalOpen, setModalOpen] = useState(false);
+  const [modalOpenPro, setModalProOpen] = useState(false);
   const [itemVisibility, setItemVisibility] = useState<boolean[]>([
     true,
     true,
@@ -23,6 +25,7 @@ const Dashsidebar: React.FC = () => {
 
   const handleCloseModal = () => {
     setModalOpen(false);
+    setModalProOpen(false);
   };
   return (
     <>
@@ -106,7 +109,12 @@ const Dashsidebar: React.FC = () => {
                       </button>
                     </div>
                     {itemVisibility[2] && (
-                      <button className="sb-li-bt my-1">
+                      <button
+                        className="sb-li-bt my-1"
+                        onClick={() => {
+                          setModalProOpen(true);
+                        }}
+                      >
                         ساختن پروژه جدید
                       </button>
                     )}
@@ -132,6 +140,12 @@ const Dashsidebar: React.FC = () => {
       </div>
       {modalOpen && (
         <NewWorkSpace modalOpen={modalOpen} handleClose={handleCloseModal} />
+      )}
+      {modalOpenPro && (
+        <NewProject
+          modalOpenPro={modalOpenPro}
+          handleClose={handleCloseModal}
+        />
       )}
     </>
   );
