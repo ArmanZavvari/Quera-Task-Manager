@@ -1,14 +1,18 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 
-const Forgot = () => {
+interface FormValues {
+  email: string;
+}
+
+const Forgot: React.FC = () => {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
-  } = useForm();
-  const onSubmit = (data) => console.log(data);
+  } = useForm<FormValues>();
+  
+  const onSubmit = (data: FormValues) => console.log(data);
 
   return (
     <div className="relative z-10 flex justify-center items-center ">
@@ -28,7 +32,6 @@ const Forgot = () => {
             <input
               type="email"
               id="email"
-              name="email"
               className="w-full px-4 py-1 border rounded-lg"
               required
               {...register("email")}
