@@ -16,7 +16,6 @@ import ListComponent from "./components/list/list";
 import BoardView from "./components/boardView/boardView";
 import Filter from "./components/filter/filter";
 
-
 const dummyHandleFilterClose = () => {};
 export default function App() {
   const tasks = [
@@ -64,7 +63,6 @@ export default function App() {
     },
   ];
 
-
   return (
     <Router>
       <Routes>
@@ -74,7 +72,15 @@ export default function App() {
           <Route path="forgot" element={<Forgot />} />
           <Route path="forgotmsg" element={<Forgotmsg />} />
           <Route path="changepsw" element={<Changepsw />} />
-          <Route path="filter" element={<Filter tasks={tasks} handleFilterClose={dummyHandleFilterClose} />} />
+          <Route
+            path="filter"
+            element={
+              <Filter
+                tasks={tasks}
+                handleFilterClose={dummyHandleFilterClose}
+              />
+            }
+          />
         </Route>
         <Route path="/dashboard" element={<Dashboard />}>
           <Route path="/dashboard" element={<Card />} />
@@ -84,7 +90,6 @@ export default function App() {
           <Route path="view" element={<BoardView />} />
         </Route>
         <Route path="/profile" element={<Dashboard />}>
-          <Route path="login" element={<LoginForm />} />
           <Route path="/profile" element={<PersonalInf />} />
           <Route path="info/account" element={<ProfileForm />} />
           <Route path="settings" element={<ProfileSettings />} />
