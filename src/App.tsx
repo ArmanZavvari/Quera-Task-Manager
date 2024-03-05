@@ -11,12 +11,60 @@ import WorkSpaces from "./components/workSpaces/workSpaces";
 import PersonalInf from "./components/profilePage/personal-information/personalinf";
 import ProfileForm from "./components/profilePage/profile-information/profileInfo";
 import ProfileSettings from "./components/profilePage/profileSetting/profilesetting";
-import Filter from "./components/filter/filter";
 import LoginForm from "./components/loginForm/liginform";
 import ListComponent from "./components/list/list";
 import BoardView from "./components/boardView/boardView";
+import Filter from "./components/filter/filter";
 
+
+const dummyHandleFilterClose = () => {};
 export default function App() {
+  const tasks = [
+    {
+      id: 1,
+      date: "2024-02-27",
+      tag: "Work",
+      member: "John",
+      priority: "",
+    },
+    {
+      id: 2,
+      date: "2024-02-28",
+      tag: "Study",
+      member: "Alice",
+      priority: "Medium",
+    },
+    {
+      id: 3,
+      date: "", // No date
+      tag: "Project",
+      member: "Bob",
+      priority: "",
+    },
+    {
+      id: 4,
+      date: "2024-03-01",
+      tag: "Work",
+      member: "",
+      priority: "High",
+    },
+    {
+      id: 5,
+      date: "", // No date
+      tag: "Study",
+      member: "John",
+      priority: "Medium",
+    },
+    {
+      id: 6,
+      date: "2024-03-02",
+      tag: "Project",
+      member: "Bob",
+      priority: "",
+    },
+  ];
+
+
   return (
     <Router>
       <Routes>
@@ -26,12 +74,14 @@ export default function App() {
           <Route path="forgot" element={<Forgot />} />
           <Route path="forgotmsg" element={<Forgotmsg />} />
           <Route path="changepsw" element={<Changepsw />} />
+          <Route path="filter" element={<Filter tasks={tasks} handleFilterClose={dummyHandleFilterClose} />} />
         </Route>
         <Route path="/dashboard" element={<Dashboard />}>
+          <Route path="/dashboard" element={<Card />} />
           <Route path="calendar" element={<Calendar />} />
-          <Route path="/dashboard" element={<WorkSpaces />} />
+          <Route path="workspaces" element={<WorkSpaces />} />
           <Route path="listview" element={<ListComponent />} />
-          <Route path="boardview" element={<BoardView />} />
+          <Route path="view" element={<BoardView />} />
         </Route>
         <Route path="/profile" element={<Dashboard />}>
           <Route path="login" element={<LoginForm />} />

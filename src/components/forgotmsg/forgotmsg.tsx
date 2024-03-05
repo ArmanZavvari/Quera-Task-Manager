@@ -1,4 +1,6 @@
-const Forgotmsg = () => {
+import React from "react";
+
+const Forgotmsg: React.FC = () => {
   return (
     <div className="relative z-10 flex justify-center items-center ">
       <div className="bg-white rounded-lg p-8 shadow-md w-[640px] h-429 ">

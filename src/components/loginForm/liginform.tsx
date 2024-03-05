@@ -1,14 +1,20 @@
-import { useForm } from "react-hook-form";
+import React from "react";
+import { useForm, SubmitHandler } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+
+interface FormInputs {
+  username: string;
+  password: string;
+}
 
 const LoginForm = () => {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
-  } = useForm();
-  const onSubmit = (data) => console.log(data);
+  } = useForm<FormInputs>();
+  const navigate = useNavigate();
+  const onSubmit: SubmitHandler<FormInputs> = (data) => console.log(data);
 
   return (
     <div className="relative z-10 flex justify-center items-center ">
@@ -28,7 +34,6 @@ const LoginForm = () => {
             <input
               type="text"
               id="username"
-              name="username"
               className="w-full px-4 py-1 mb-2 border rounded-lg"
               required
               {...register("username")}
@@ -44,7 +49,6 @@ const LoginForm = () => {
             <input
               type="password"
               id="password"
-              name="password"
               className="w-full px-4 py-1 border rounded-lg"
               required
               {...register("password")}

@@ -2,20 +2,30 @@ import React, { useState } from "react";
 import CustomModal from "../common/modal";
 import { useForm } from "react-hook-form";
 
-const Register = () => {
-  const [modalOpen, setModalOpen] = useState(false);
+interface FormValues {
+  username: string;
+  email: string;
+  password: string;
+  checkbox: boolean;
+}
+
+const Register: React.FC = () => {
+  const [modalOpen, setModalOpen] = useState<boolean>(false);
 
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
-  } = useForm();
-  const onSubmit = (data) => console.log(data);
+  } = useForm<FormValues>();
+
+  const onSubmit = (data: FormValues) => {
+    console.log(data);
+  };
 
   const handleCloseModal = () => {
     setModalOpen(false);
   };
+
   return (
     <>
       {!modalOpen && (
@@ -36,7 +46,6 @@ const Register = () => {
                 <input
                   type="text"
                   id="username"
-                  name="username"
                   className="w-full px-4 py-1  border rounded-lg"
                   required
                   {...register("username")}
@@ -52,7 +61,6 @@ const Register = () => {
                 <input
                   type="email"
                   id="email"
-                  name="email"
                   className="w-full px-4 py-1 border rounded-lg"
                   required
                   {...register("email")}
@@ -68,7 +76,6 @@ const Register = () => {
                 <input
                   type="password"
                   id="password"
-                  name="password"
                   className="w-full px-4 py-1 border rounded-lg"
                   required
                   {...register("password")}
@@ -91,7 +98,6 @@ const Register = () => {
                 <input
                   type="checkbox"
                   id="rules"
-                  name="rules"
                   className="w-5 h-5 rounded border border-gray-400 text-gray-600"
                   required
                   {...register("checkbox")}
