@@ -3,30 +3,92 @@ import icons from "../../../../utils/icons/icons";
 import NewWorkSpace from "./components/newWorkSpace/newWorkSpace";
 import NewProject from "./components/newProject/newProject";
 
+type SubItem = {
+  id: number;
+  name: string;
+};
+
+type Item = {
+  id: number;
+  name: string;
+  color: string;
+  sublist: SubItem[];
+};
+
 const Dashsidebar: React.FC = () => {
   const [isListVisible, setListVisible] = useState(true);
   const [modalOpen, setModalOpen] = useState(false);
   const [modalOpenPro, setModalProOpen] = useState(false);
-  const [itemVisibility, setItemVisibility] = useState<boolean[]>([
-    true,
-    true,
-    true,
-  ]);
+  const [hoveredItem, setHoveredItem] = useState<number | null>(null);
+  const [itemVisibility, setItemVisibility] = useState<{
+    [key: number]: boolean;
+  }>({});
+  const [hoveredSubItem, setHoveredSubItem] = useState<number | null>(null);
+
+  const workSpaceData: Item[] = [
+    {
+      id: 1,
+      name: "درس مدیریت پروژه",
+      color: "#40c057",
+      sublist: [
+        { id: 1, name: "پروژه اول" },
+        { id: 2, name: "پروژه دوم" },
+        { id: 3, name: "پروژه سوم" },
+        { id: 4, name: "پروژه چهارم" },
+        { id: 5, name: "پروژه پنجم" },
+      ],
+    },
+    {
+      id: 2,
+      name: "کارهای شخصی",
+      color: "#fab005",
+      sublist: [
+        { id: 1, name: "پروژه اول" },
+        { id: 2, name: "پروژه دوم" },
+      ],
+    },
+    {
+      id: 3,
+      name: "درس کامپایلر",
+      color: "#fa5252",
+      sublist: [],
+    },
+    {
+      id: 4,
+      name: "درس طراحی الگوریتم",
+      color: "#228be6",
+      sublist: [
+        { id: 1, name: "پروژه اول" },
+        { id: 2, name: "پروژه دوم" },
+        { id: 3, name: "پروژه سوم" },
+        { id: 4, name: "پروژه چهارم" },
+      ],
+    },
+  ];
 
   const toggleListVisibility = () => {
     setListVisible(!isListVisible);
   };
 
   const toggleItemVisibility = (index: number) => {
-    const updatedVisibility = [...itemVisibility];
-    updatedVisibility[index] = !updatedVisibility[index];
-    setItemVisibility(updatedVisibility);
+    setItemVisibility((prevState) => ({
+      ...prevState,
+      [index]: !prevState[index],
+    }));
   };
 
   const handleCloseModal = () => {
     setModalOpen(false);
     setModalProOpen(false);
   };
+  const handleItemClick = (item: Item) => {
+    console.log(`آیتم ${item.name} با شناسه ${item.id} انتخاب شد.`);
+  };
+
+  const handleSubItemClick = (subItem: SubItem) => {
+    console.log(`آیتم ${subItem.name} با شناسه ${subItem.id} انتخاب شد.`);
+  };
+
   return (
     <>
       <div dir="rtl">
@@ -75,63 +137,72 @@ const Dashsidebar: React.FC = () => {
               </button>
               <div className="text-right my-2">
                 <ul>
-                  <li style={{ cursor: "pointer" }}>
-                    <div className="sb-li py-2">
-                      <span className="sq1"></span>
-                      <button
-                        onClick={() => toggleItemVisibility(0)}
-                        className="text-base"
-                      >
-                        درس مدیریت پروژه
-                      </button>
-                    </div>
-                    {itemVisibility[0] && <ul className="indent-5"></ul>}
-                  </li>
-                  <li style={{ cursor: "pointer" }}>
-                    <div className="sb-li py-2">
-                      <span className="sq2"></span>
-                      <button onClick={() => toggleItemVisibility(1)}>
-                        کارهای شخصی
-                      </button>
-                    </div>
-                    {itemVisibility[1] && (
-                      <ul className="indent-5">
-                        <li className="li-hov rounded py-2">پروژه اول</li>
-                        <li className="li-hov rounded py-2">پروژه دوم</li>
-                      </ul>
-                    )}
-                  </li>
-                  <li style={{ cursor: "pointer" }}>
-                    <div className="sb-li py-2">
-                      <span className="sq3"></span>
-                      <button onClick={() => toggleItemVisibility(2)}>
-                        درس کامپایلر
-                      </button>
-                    </div>
-                    {itemVisibility[2] && (
-                      <button
-                        className="sb-li-bt my-1"
-                        onClick={() => {
-                          setModalProOpen(true);
-                        }}
-                      >
-                        ساختن پروژه جدید
-                      </button>
-                    )}
-                  </li>
-                  <li style={{ cursor: "pointer" }}>
-                    <div className="sb-li py-2">
-                      <span className="sq4"></span>
-                      <button onClick={() => toggleItemVisibility(3)}>
-                        درس طراحی الگوریتم
-                      </button>
-                    </div>
-                    {itemVisibility[3] && (
-                      <button className="sb-li-bt my-2">
-                        ساختن پروژه جدید
-                      </button>
-                    )}
-                  </li>
+                  {workSpaceData.map((item, index) => (
+                    <li
+                      key={item.id}
+                      style={{ cursor: "pointer" }}
+                      onMouseEnter={() => setHoveredItem(item.id)}
+                      onMouseLeave={() => setHoveredItem(null)}
+                    >
+                      <div className="flex items-center justify-between gap-[5px] p-1 my-2 hover:bg-[#FAFAFA] rounded">
+                        <div className="flex items-center gap-[5px]">
+                          <span
+                            className="w-[15px] h-[15px] rounded-[4px] inline-block"
+                            style={{ backgroundColor: item.color }}
+                          ></span>
+                          <button onClick={() => toggleItemVisibility(item.id)}>
+                            {item.name}
+                          </button>
+                        </div>
+                        {hoveredItem === item.id && (
+                          <button
+                            onClick={() => handleItemClick(item)}
+                            className=" px-2"
+                          >
+                            {icons.dots("#323232", "20px")}
+                          </button>
+                        )}
+                      </div>
+                      {itemVisibility[item.id] && (
+                        <ul className="indent-5">
+                          {item.sublist.length === 0 ? (
+                            <button
+                              className="my-1 mr-[-20px] border-2 border-[#208d8e] text-[#208d8e] rounded-lg p-1 w-[274px] hover:bg-[#208d8e] hover:text-white"
+                              onClick={() => {
+                                setModalProOpen(true);
+                              }}
+                            >
+                              ساختن پروژه جدید
+                            </button>
+                          ) : (
+                            item.sublist.map((subItem, subIndex) => (
+                              <li
+                                key={subIndex}
+                                className="hover:bg-[#FAFAFA] focus:bg-[#e9f9ff] rounded py-2 relative flex items-center justify-between"
+                                onMouseEnter={() =>
+                                  setHoveredSubItem(subItem.id)
+                                }
+                                onMouseLeave={() => setHoveredSubItem(null)}
+                              >
+                                {subItem.name}
+                                {hoveredItem === item.id &&
+                                  hoveredSubItem === subItem.id && (
+                                    <button
+                                      className="px-3"
+                                      onClick={() =>
+                                        handleSubItemClick(subItem)
+                                      }
+                                    >
+                                      {icons.dots("#323232", "20px")}
+                                    </button>
+                                  )}
+                              </li>
+                            ))
+                          )}
+                        </ul>
+                      )}
+                    </li>
+                  ))}
                 </ul>
               </div>
             </div>
