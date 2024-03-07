@@ -4,7 +4,7 @@ interface ProfileProps {
   image?: string;
   firstName: string;
   lastName: string;
-  imgWidth?: string;
+  imgWidth: string;
   imgHeight: string;
 }
 
@@ -21,7 +21,7 @@ const ProfilePicture: React.FC<ProfileProps> = ({
         <img
           src={image}
           alt={`${firstName} ${lastName}`}
-          className="w-[36px] h-[36px] rounded-full"
+          className={`w-[${imgWidth}] h-[${imgHeight}] rounded-full`}
         />
       </div>
     );

@@ -87,7 +87,7 @@ export default function App() {
           <Route path="calendar" element={<Calendar />} />
           <Route path="workspaces" element={<WorkSpaces />} />
           <Route path="listview" element={<ListComponent />} />
-          <Route path="view" element={<BoardView />} />
+          <Route path="boardview" element={<BoardView />} />
         </Route>
         <Route path="/profile" element={<Dashboard />}>
           <Route path="/profile" element={<PersonalInf />} />

@@ -2,21 +2,28 @@ import React, { useState, useEffect } from "react";
 import icons from "../../utils/icons/icons";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import Card from "../task/task";
-import ReactDOM from 'react-dom';
+import ReactDOM from "react-dom";
 
 function BoardView() {
-  const [state, setState] = useState([getItems(3), getItems(1), getItems(1), getItems(1), getItems(1), getItems(1)]);
+  const [state, setState] = useState([
+    getItems(3),
+    getItems(1),
+    getItems(1),
+    getItems(1),
+    getItems(1),
+    getItems(1),
+  ]);
 
-  useEffect(() => {
-    const container = document.getElementById('root');
-    ReactDOM.render(<BoardView />, container);
-  }, []);
+  // useEffect(() => {
+  //   const container = document.getElementById("root");
+  //   ReactDOM.render(<BoardView />, container);
+  // }, []);
 
   // fake data generator
   function getItems(count, offset = 0) {
     return Array.from({ length: count }, (_, k) => ({
       id: `item-${k + offset}-${new Date().getTime()}`,
-      content: <Card /> // Render your Card component here instead of fake data
+      content: <Card />, // Render your Card component here instead of fake data
     }));
   }
 
@@ -50,7 +57,10 @@ function BoardView() {
     const destinationColumnIndex = +destination.droppableId;
 
     // If the card is dropped in the same column and position
-    if (sourceColumnIndex === destinationColumnIndex && source.index === destination.index) {
+    if (
+      sourceColumnIndex === destinationColumnIndex &&
+      source.index === destination.index
+    ) {
       return;
     }
 
@@ -59,11 +69,20 @@ function BoardView() {
 
     // If the card is dropped within the same column
     if (sourceColumnIndex === destinationColumnIndex) {
-      const items = reorder(state[sourceColumnIndex], source.index, destination.index);
+      const items = reorder(
+        state[sourceColumnIndex],
+        source.index,
+        destination.index
+      );
       newState[sourceColumnIndex] = items;
     } else {
       // If the card is dropped in a different column
-      const result = move(state[sourceColumnIndex], state[destinationColumnIndex], source, destination);
+      const result = move(
+        state[sourceColumnIndex],
+        state[destinationColumnIndex],
+        source,
+        destination
+      );
       newState[sourceColumnIndex] = result[sourceColumnIndex];
       newState[destinationColumnIndex] = result[destinationColumnIndex];
     }
@@ -198,8 +217,8 @@ function BoardView() {
           )}
         </Droppable>
 
-                {/* fifth column - Done */}
-                <Droppable droppableId="4">
+        {/* fifth column - Done */}
+        <Droppable droppableId="4">
           {(provided) => (
             <div
               {...provided.droppableProps}

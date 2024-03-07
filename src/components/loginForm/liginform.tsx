@@ -1,20 +1,37 @@
-import React from "react";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-
-interface FormInputs {
-  username: string;
-  password: string;
-}
+import { login } from "../../services/userService";
+import { LoginFormData, LoginResponse } from "./../../types/types";
 
 const LoginForm = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormInputs>();
+  } = useForm<LoginFormData>();
   const navigate = useNavigate();
-  const onSubmit: SubmitHandler<FormInputs> = (data) => console.log(data);
+  // const onSubmit: SubmitHandler<FormInputs> = (data) => console.log(data);
+
+  const onSubmit: SubmitHandler<LoginFormData> = async (data) => {
+    const userData = {
+      username: data.username,
+      password: data.password,
+    };
+    try {
+      // const result = await axios.post(
+      //   "http://185.8.174.74:8000/accounts/login/",
+      //   userData
+      // );
+      const result = await login(userData);
+      const loginResponseData = result.data as LoginResponse;
+      localStorage.setItem("refresh", loginResponseData.refresh);
+      localStorage.setItem("access", loginResponseData.access);
+      navigate("/dashboard/workspaces");
+    } catch (e) {
+      console.log("Error Occured!");
+      console.log(e);
+    }
+  };
 
   return (
     <div className="relative z-10 flex justify-center items-center ">

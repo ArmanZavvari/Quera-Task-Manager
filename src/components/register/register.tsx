@@ -1,13 +1,8 @@
 import React, { useState } from "react";
 import CustomModal from "../common/modal";
 import { useForm } from "react-hook-form";
-
-interface FormValues {
-  username: string;
-  email: string;
-  password: string;
-  checkbox: boolean;
-}
+import userService from "../../services/userService";
+import { FormValues } from "../../types/types";
 
 const Register: React.FC = () => {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
@@ -18,8 +13,19 @@ const Register: React.FC = () => {
     formState: { errors },
   } = useForm<FormValues>();
 
-  const onSubmit = (data: FormValues) => {
-    console.log(data);
+  const onSubmit = async (data: FormValues) => {
+    const userData = {
+      username: data.username,
+      password: data.password,
+      email: data.email,
+    };
+    try {
+      const result = await userService.register(userData);
+      console.log(result.data);
+    } catch (e) {
+      console.log("Error Occured!");
+      console.log(e);
+    }
   };
 
   const handleCloseModal = () => {

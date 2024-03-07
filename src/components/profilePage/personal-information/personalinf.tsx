@@ -32,7 +32,7 @@ const PersonalInf: React.FC = () => {
         اطلاعات فردی
       </h2>
       <div className="flex items-center gap-x-2 justify-start">
-        <div>
+        <div className="h-[100px] w-[100px] rounded">
           <ProfilePicture
             lastName="A"
             firstName="B"
