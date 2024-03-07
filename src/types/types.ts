@@ -16,6 +16,10 @@ export interface SignupFormData {
   password: string;
 }
 
+export interface ForgetPasswordData {
+  email: string;
+}
+
 export interface LoginFormData {
   username: string;
   password: string;

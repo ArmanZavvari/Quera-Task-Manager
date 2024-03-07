@@ -1,18 +1,27 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-
-interface FormValues {
-  email: string;
-}
+import { ForgetPasswordData } from "../../types/types";
+import { forgetPassword } from "../../services/userService";
 
 const Forgot: React.FC = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormValues>();
-  
-  const onSubmit = (data: FormValues) => console.log(data);
+  } = useForm<ForgetPasswordData>();
+
+  const onSubmit = async (data: ForgetPasswordData) => {
+    const userData = {
+      email: data.email,
+    };
+    try {
+      const result = await forgetPassword(userData);
+      console.log(result.data);
+    } catch (e) {
+      console.log("Error Occured!");
+      console.log(e);
+    }
+  };
 
   return (
     <div className="relative z-10 flex justify-center items-center ">
