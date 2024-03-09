@@ -26,13 +26,15 @@ const Calendar: React.FC = () => {
   };
 
   const daysInMonth = (year: number, month: number) => {
-    return moment.jDaysInMonth(year, month);
+    const daysInMonth = moment.jDaysInMonth(year, month - 1);
+
+    return daysInMonth;
   };
 
   const generateCalendar = () => {
     const totalDays = daysInMonth(currentYear, currentMonth);
     const firstDayOfMonth = moment(
-      `${currentYear}/${currentMonth}/1`,
+      `${currentYear}/${currentMonth}/2`,
       "jYYYY/jM/jD"
     ).day();
     const weeks: Array<Array<number | string>> = [[]];
@@ -91,8 +93,8 @@ const Calendar: React.FC = () => {
   ];
 
   return (
-    <div className="p-4 box-content w-[1033px] h-[779px]">
-      <div className="invisible">
+    <div className="box-content w-[1033px] h-[779px]">
+      <div className="invisible mt-[-15px]">
         <MonthControls
           currentYear={currentYear}
           currentMonth={currentMonth}
@@ -109,12 +111,12 @@ const Calendar: React.FC = () => {
             {weekday}
           </div>
         ))}
-        {weeks.map((week, weekIndex, weekday) =>
-          week.map((day, dayIndex, weekday) => (
+        {weeks.map((week) =>
+          week.map((day, dayIndex) => (
             <div
               key={dayIndex}
               className={`border border-gray-200 p-3 flex relative justify-between items-end flex-col h-[150px] w-[148px] ${
-                day === today ? "border-teal-600 border" : ""
+                day === today ? "border-teal-600 border-2" : ""
               }`}
               onMouseEnter={() => handleDayHover(Number(day))}
               onMouseLeave={handleMouseLeave}
