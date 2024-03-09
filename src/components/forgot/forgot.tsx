@@ -2,8 +2,10 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { ForgetPasswordData } from "../../types/types";
 import { forgetPassword } from "../../services/userService";
+import { useNavigate } from "react-router-dom";
 
 const Forgot: React.FC = () => {
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -16,6 +18,7 @@ const Forgot: React.FC = () => {
     };
     try {
       const result = await forgetPassword(userData);
+      navigate("/forgot-message");
       console.log(result.data);
     } catch (e) {
       console.log("Error Occured!");

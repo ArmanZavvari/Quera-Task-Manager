@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import CustomModal from "../common/modal";
 import { useForm } from "react-hook-form";
-import userService from "../../services/userService";
-import { FormValues } from "../../types/types";
+import userService, { login } from "../../services/userService";
+import { FormValues, LoginResponse } from "../../types/types";
+import { useNavigate } from "react-router-dom";
 
 const Register: React.FC = () => {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
+  const navigate = useNavigate();
 
   const {
     register,
@@ -21,6 +23,13 @@ const Register: React.FC = () => {
     };
     try {
       const result = await userService.register(userData);
+
+      const loginResult = await login(userData);
+
+      const loginResponseData = loginResult.data as LoginResponse;
+      localStorage.setItem("refresh", loginResponseData.refresh);
+      localStorage.setItem("access", loginResponseData.access);
+      navigate("/dashboard/workspaces");
       console.log(result.data);
     } catch (e) {
       console.log("Error Occured!");

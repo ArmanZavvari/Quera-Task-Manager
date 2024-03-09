@@ -70,8 +70,8 @@ export default function App() {
           <Route path="/" element={<LoginForm />} />
           <Route path="register" element={<Register />} />
           <Route path="forgot" element={<Forgot />} />
-          <Route path="forgotmsg" element={<Forgotmsg />} />
-          <Route path="changepsw" element={<Changepsw />} />
+          <Route path="changepassword" element={<Changepsw />} />
+          <Route path="forgot-message" element={<Forgotmsg />} />
           <Route
             path="filter"
             element={
