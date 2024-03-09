@@ -10,7 +10,7 @@ const ListComponent = () => {
   });
 
   return (
-    <div dir="rtl" className="flex flex-col w-[986px]">
+    <div dir="rtl" className="flex flex-col w-[986px] mt-4">
       <div className="flex items-center">
         {icons.chevron_down_circle("#323232", "20px")}
         <button className="bg-pink-500 text-white border rounded-md py-1 px-3">
@@ -65,12 +65,6 @@ const ListComponent = () => {
         </div>
       </div>
 
-      <div className="flex items-center mt-20">
-        {icons.chevron_down_circle("#323232", "20px")}
-        <button className="bg-pink-500 text-white border rounded-md py-1 px-3">
-          pending
-        </button>
-      </div>
     </div>
   );
 };
