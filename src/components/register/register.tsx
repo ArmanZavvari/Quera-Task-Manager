@@ -96,7 +96,7 @@ const Register: React.FC = () => {
                   {...register("password")}
                 />
               </div>
-              <div className="flex justify-end items-center mb-2">
+              <div className="flex justify-end  mb-2">
                 <label
                   htmlFor="rules"
                   className="block text-base leading-5 font-normal text-right mb-2 ml-2"
@@ -113,7 +113,7 @@ const Register: React.FC = () => {
                 <input
                   type="checkbox"
                   id="rules"
-                  className="w-5 h-5 rounded border border-gray-400 text-gray-600"
+                  className="w-5 h-5 rounded border border-gray-400 text-gray-600 ml-2"
                   required
                   {...register("checkbox")}
                 />

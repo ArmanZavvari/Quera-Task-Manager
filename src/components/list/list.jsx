@@ -1,5 +1,5 @@
 import React from "react";
-import icons from "../../../src/utils/icons/icons";
+import icons from "../../utils/icons/icons";
 import ProfilePicture from "../common/profilePicture/profilePicture";
 
 const ListComponent = () => {
@@ -17,9 +17,9 @@ const ListComponent = () => {
           pending
         </button>
       </div>
-      <div className="flex items-center justify-between rounded-md bg-slate-100  h-[47px] mt-5 ">
+      <div className="flex items-center justify-between rounded-md   h-[47px] mt-5 ">
         <div className="flex items-center w-[493px]">
-          <span className="w-4 h-4 rounded bg-pink-500"></span>
+          <span className="w-4 h-4 rounded bg-pink-500 ml-2"></span>
           <p className="text-base leading-6 text-right">
             این یک تیتر برای این تسک است.
           </p>
@@ -44,9 +44,9 @@ const ListComponent = () => {
         </div>
       </div>
 
-      <div className="flex items-center justify-between rounded-md bg-slate-100  h-[47px] mt-5 ">
+      <div className="flex items-center justify-between rounded-md  h-[47px] mt-5 ">
         <div className="flex items-center w-[493px]">
-          <span className="w-4 h-4 rounded bg-pink-500"></span>
+          <span className="w-4 h-4 rounded bg-pink-500 ml-2"></span>
           <p className="text-base leading-6 text-right">
             این یک تیتر برای این تسک است.
           </p>
@@ -76,16 +76,3 @@ const ListComponent = () => {
 };
 
 export default ListComponent;
-
-// import React from 'react';
-
-// const ListComponent = () => {
-//   return (
-//     <div className="relative">
-//       <img src='./' alt="عکس پروفایل 1" className="w-24 h-24 rounded-full border border-gray-300" />
-//       <img src='' alt="عکس پروفایل 2" className="w-24 h-24 rounded-full border border-gray-300 absolute top-0 left-12" />
-//     </div>
-//   );
-// };
-
-// export default ListComponent;
