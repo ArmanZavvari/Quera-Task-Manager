@@ -13,6 +13,7 @@ const ListComponent = () => {
     day: "numeric",
     month: "long",
   });
+  
 
   return (
     <div dir="rtl" className="flex flex-col w-[986px] mt-4">
