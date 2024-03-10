@@ -17,18 +17,26 @@ const ListComponent = () => {
 
   return (
     <div dir="rtl" className="flex flex-col w-[986px] mt-4">
-      <div className="flex items-center">
-        {icons.chevron_down_circle("#323232", "20px")}
-        <button
-          className="bg-pink-500 text-white border rounded-md py-1 px-3"
-          onClick={toggleTasks} 
-        >
-          pending
-        </button>
+      <div className="flex items-center " >
+        <div className="flex items-center w-[493px]">
+          {icons.chevron_down_circle("#323232", "20px")}
+          <button
+            className="bg-pink-500 text-white border rounded-md py-1 px-3"
+            onClick={toggleTasks} 
+          >
+            pending
+          </button>
+        </div>
+        <div className="flex items-center justify-between w-[493px]">
+          <p>اعضا</p>
+          <p>ددلاین</p>
+          <p>اولویت</p>
+          <p>توضیحات</p>
+        </div>
       </div>
       {showTasks && ( 
         <div>
-          <div className="flex items-center justify-between rounded-md   h-[47px] mt-5">
+          <div className="flex items-center justify-between rounded-md  h-[47px] mt-5">
             <div className="flex items-center w-[493px]">
               <span className="w-4 h-4 rounded bg-pink-500 ml-2"></span>
               <p className="text-base leading-6 text-right">
