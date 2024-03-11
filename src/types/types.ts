@@ -41,3 +41,22 @@ export interface RefreshTokenResponse {
   access: string;
   refresh: string;
 }
+
+export interface WorkSpacesData {
+  id: string;
+  name: string;
+  color: string;
+  projects:any;
+}
+export interface WorkSpacesPost {
+  name: string;
+  color: string;
+}
+export interface ProjectData {
+  id: string;
+  name: string;
+  workspaceId: string;
+}
+export interface ProjectPost {
+  name: string;
+}

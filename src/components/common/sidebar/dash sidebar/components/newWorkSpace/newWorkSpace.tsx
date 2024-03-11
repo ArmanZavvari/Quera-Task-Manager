@@ -3,10 +3,17 @@ import icons from "../../../../../../utils/icons/icons";
 import NameWorkSpace from "./nameWorkSpace/nameWorkSpace";
 import ColorWorkSpace from "./colorWorkSpace/colorWorkSpace";
 import SummaryModal from "./infoWorkSpace/infoWorkSpace";
+import { postWorkSpace } from "../../../../../../services/workSpaceService";
 
 interface NewWorkSpaceProps {
   modalOpen?: boolean;
   handleClose(): void;
+}
+interface Props {
+  data: {
+    name: string;
+    color: string;
+  };
 }
 
 const NewWorkSpace: React.FC<NewWorkSpaceProps> = ({
@@ -24,10 +31,22 @@ const NewWorkSpace: React.FC<NewWorkSpaceProps> = ({
     setStep(step - 1);
   };
 
-  const handleSubmit = () => {
-    console.log("done");
+  const handleSubmit = async () => {
+    const userData = {
+      name: data.name,
+      color: data.color,
+    };
+    try {
+      const result = await postWorkSpace(userData);
+      console.log(result);
+    } catch (e) {
+      console.log("Error Occured!");
+      console.log(e);
+    }
+    console.log(userData);
     handleClose();
   };
+
   useEffect(() => {}, [data]);
   const handleOverlayClick = (
     e: React.MouseEvent<HTMLDivElement, MouseEvent>

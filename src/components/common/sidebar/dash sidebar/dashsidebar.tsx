@@ -1,70 +1,50 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import icons from "../../../../utils/icons/icons";
 import NewWorkSpace from "./components/newWorkSpace/newWorkSpace";
 import NewProject from "./components/newProject/newProject";
-
-type SubItem = {
-  id: number;
-  name: string;
-};
-
-type Item = {
-  id: number;
-  name: string;
-  color: string;
-  sublist: SubItem[];
-};
+import { ProjectData, WorkSpacesData } from "../../../../types/types";
+import { workSpaces } from "../../../../services/workSpaceService";
+import { projects } from "../../../../services/projectService";
 
 const Dashsidebar: React.FC = () => {
   const [isListVisible, setListVisible] = useState(true);
   const [modalOpen, setModalOpen] = useState(false);
   const [modalOpenPro, setModalProOpen] = useState(false);
-  const [hoveredItem, setHoveredItem] = useState<number | null>(null);
+  const [hoveredItem, setHoveredItem] = useState<string | null>(null);
   const [itemVisibility, setItemVisibility] = useState<{
     [key: number]: boolean;
   }>({});
-  const [hoveredSubItem, setHoveredSubItem] = useState<number | null>(null);
+  const [hoveredSubItem, setHoveredSubItem] = useState<string | null>(null);
+  const [id, setId] = useState<string>("");
+  const [workSpaceData, setWorkSpaceData] = useState<WorkSpacesData[]>([]);
+  const [projectData, setProjectData] = useState<ProjectData[]>([]);
 
-  const workSpaceData: Item[] = [
-    {
-      id: 1,
-      name: "درس مدیریت پروژه",
-      color: "#40c057",
-      sublist: [
-        { id: 1, name: "پروژه اول" },
-        { id: 2, name: "پروژه دوم" },
-        { id: 3, name: "پروژه سوم" },
-        { id: 4, name: "پروژه چهارم" },
-        { id: 5, name: "پروژه پنجم" },
-      ],
-    },
-    {
-      id: 2,
-      name: "کارهای شخصی",
-      color: "#fab005",
-      sublist: [
-        { id: 1, name: "پروژه اول" },
-        { id: 2, name: "پروژه دوم" },
-      ],
-    },
-    {
-      id: 3,
-      name: "درس کامپایلر",
-      color: "#fa5252",
-      sublist: [],
-    },
-    {
-      id: 4,
-      name: "درس طراحی الگوریتم",
-      color: "#228be6",
-      sublist: [
-        { id: 1, name: "پروژه اول" },
-        { id: 2, name: "پروژه دوم" },
-        { id: 3, name: "پروژه سوم" },
-        { id: 4, name: "پروژه چهارم" },
-      ],
-    },
-  ];
+  useEffect(() => {
+    workSpaces()
+      .then((response) => {
+        getProjects(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching workspaces:", error);
+        console.log(error);
+      });
+  }, []);
+
+  const getProjects = (workspaces: WorkSpacesData[]) => {
+    const data: WorkSpacesData[] = [];
+    workspaces.map(async (workspace) => {
+      projects(workspace.id)
+        .then((response) => {
+          data.push({ ...workspace, projects: response.data });
+        })
+        .catch((error) => {
+          console.error("Error fetching projects:", error);
+        })
+        .finally(() => {
+          setWorkSpaceData(data);
+        });
+    });
+  };
 
   const toggleListVisibility = () => {
     setListVisible(!isListVisible);
@@ -81,12 +61,8 @@ const Dashsidebar: React.FC = () => {
     setModalOpen(false);
     setModalProOpen(false);
   };
-  const handleItemClick = (item: Item) => {
+  const handleItemClick = (item: WorkSpacesData) => {
     console.log(`آیتم ${item.name} با شناسه ${item.id} انتخاب شد.`);
-  };
-
-  const handleSubItemClick = (subItem: SubItem) => {
-    console.log(`آیتم ${subItem.name} با شناسه ${subItem.id} انتخاب شد.`);
   };
 
   return (
@@ -150,7 +126,11 @@ const Dashsidebar: React.FC = () => {
                             className="w-[15px] h-[15px] rounded-[4px] inline-block"
                             style={{ backgroundColor: item.color }}
                           ></span>
-                          <button onClick={() => toggleItemVisibility(item.id)}>
+                          <button
+                            onClick={() =>
+                              toggleItemVisibility(Number(item.id))
+                            }
+                          >
                             {item.name}
                           </button>
                         </div>
@@ -163,41 +143,47 @@ const Dashsidebar: React.FC = () => {
                           </button>
                         )}
                       </div>
-                      {itemVisibility[item.id] && (
+                      {itemVisibility[Number(item.id)] && (
                         <ul className="indent-5">
-                          {item.sublist.length === 0 ? (
+                          {item.projects.length === 0 ? (
                             <button
+                              id={item.id}
                               className="my-1 mr-[-20px] border-2 border-[#208d8e] text-[#208d8e] rounded-lg p-1 w-[274px] hover:bg-[#208d8e] hover:text-white"
                               onClick={() => {
                                 setModalProOpen(true);
+                                setId(item.id);
+                                console.log(item.id);
                               }}
                             >
                               ساختن پروژه جدید
                             </button>
                           ) : (
-                            item.sublist.map((subItem, subIndex) => (
-                              <li
-                                key={subIndex}
-                                className="hover:bg-[#FAFAFA] focus:bg-[#e9f9ff] rounded py-2 relative flex items-center justify-between"
-                                onMouseEnter={() =>
-                                  setHoveredSubItem(subItem.id)
-                                }
-                                onMouseLeave={() => setHoveredSubItem(null)}
-                              >
-                                {subItem.name}
-                                {hoveredItem === item.id &&
-                                  hoveredSubItem === subItem.id && (
-                                    <button
-                                      className="px-3"
-                                      onClick={() =>
-                                        handleSubItemClick(subItem)
-                                      }
-                                    >
-                                      {icons.dots("#323232", "20px")}
-                                    </button>
-                                  )}
-                              </li>
-                            ))
+                            item.projects.map(
+                              (
+                                element: {
+                                  id: React.Key | null | undefined;
+                                  name: string;
+                                },
+                                indexx: any
+                              ) => (
+                                <li
+                                  key={element.id}
+                                  className="hover:bg-[#FAFAFA] focus:bg-[#e9f9ff] rounded py-2 relative flex items-center justify-between"
+                                  onMouseEnter={() =>
+                                    setHoveredSubItem(element.id as string)
+                                  }
+                                  onMouseLeave={() => setHoveredSubItem(null)}
+                                >
+                                  {element.name}
+                                  {hoveredItem === item.id &&
+                                    hoveredSubItem === element.id && (
+                                      <button className="px-3">
+                                        {icons.dots("#323232", "20px")}
+                                      </button>
+                                    )}
+                                </li>
+                              )
+                            )
                           )}
                         </ul>
                       )}
@@ -214,6 +200,7 @@ const Dashsidebar: React.FC = () => {
       )}
       {modalOpenPro && (
         <NewProject
+          id={id}
           modalOpenPro={modalOpenPro}
           handleClose={handleCloseModal}
         />
