@@ -46,6 +46,7 @@ export interface WorkSpacesData {
   id: string;
   name: string;
   color: string;
+  projects:any;
 }
 export interface WorkSpacesPost {
   name: string;

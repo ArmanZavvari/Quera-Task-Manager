@@ -5,7 +5,6 @@ import NewProject from "./components/newProject/newProject";
 import { ProjectData, WorkSpacesData } from "../../../../types/types";
 import { workSpaces } from "../../../../services/workSpaceService";
 import { projects } from "../../../../services/projectService";
-import { response } from "express";
 
 const Dashsidebar: React.FC = () => {
   const [isListVisible, setListVisible] = useState(true);
@@ -19,45 +18,33 @@ const Dashsidebar: React.FC = () => {
   const [id, setId] = useState<string>("");
   const [workSpaceData, setWorkSpaceData] = useState<WorkSpacesData[]>([]);
   const [projectData, setProjectData] = useState<ProjectData[]>([]);
-  useEffect(() => {
-    console.log("projectData", projectData);
-    // });
-  }, [projectData]);
+
   useEffect(() => {
     workSpaces()
       .then((response) => {
-        setWorkSpaceData(response.data);
+        getProjects(response.data);
       })
       .catch((error) => {
         console.error("Error fetching workspaces:", error);
         console.log(error);
       });
-    //   projects(workSpaceData.id)
-    // .then((response) => {
-    //   setProjectData(response.data);
-    //   console.log("hi");
-    // })
-    // .catch((error) => {
-    //   console.error("Error fetching projects:", error);
-    //   console.log("err");
-    //   console.log(id);
-    // });
   }, []);
 
-  // useEffect(() => {
-  //   // projects(workSpaceData.id)
-  //   //   .then((response) => {
-  //   //     setProjectData(response.data);
-  //   //     console.log("hi");
-  //   //   })
-  //   //   .catch((error) => {
-  //   //     console.error("Error fetching projects:", error);
-  //   //     console.log("err");
-  //   //     console.log(id);
-  //   //   });
-  //   console.log("workSpaceData", workSpaceData);
-  //   workSpaceData.map;
-  // }, [id, workSpaceData]);
+  const getProjects = (workspaces: WorkSpacesData[]) => {
+    const data: WorkSpacesData[] = [];
+    workspaces.map(async (workspace) => {
+      projects(workspace.id)
+        .then((response) => {
+          data.push({ ...workspace, projects: response.data });
+        })
+        .catch((error) => {
+          console.error("Error fetching projects:", error);
+        })
+        .finally(() => {
+          setWorkSpaceData(data);
+        });
+    });
+  };
 
   const toggleListVisibility = () => {
     setListVisible(!isListVisible);
@@ -77,11 +64,6 @@ const Dashsidebar: React.FC = () => {
   const handleItemClick = (item: WorkSpacesData) => {
     console.log(`آیتم ${item.name} با شناسه ${item.id} انتخاب شد.`);
   };
-
-  const handleSubItemClick = (item: ProjectData) => {
-    console.log(`آیتم ${item.name} با شناسه ${item.id} انتخاب شد.`);
-  };
-  const handleProject = (response: any, item: any) => {};
 
   return (
     <>
@@ -145,26 +127,9 @@ const Dashsidebar: React.FC = () => {
                             style={{ backgroundColor: item.color }}
                           ></span>
                           <button
-                            onClick={() => {
-                              toggleItemVisibility(Number(item.id));
-                              projects(item.id)
-                                .then((response) => {
-                                  const newArray = response.data.map(
-                                    (v: any) => ({ ...v, workspaceId: item.id })
-                                  );
-                                  console.log(newArray);
-
-                                  setProjectData([...projectData, ...newArray]);
-                                })
-                                .catch((error) => {
-                                  console.error(
-                                    "Error fetching projects:",
-                                    error
-                                  );
-                                  console.log("err");
-                                  console.log(id);
-                                });
-                            }}
+                            onClick={() =>
+                              toggleItemVisibility(Number(item.id))
+                            }
                           >
                             {item.name}
                           </button>
@@ -180,47 +145,44 @@ const Dashsidebar: React.FC = () => {
                       </div>
                       {itemVisibility[Number(item.id)] && (
                         <ul className="indent-5">
-                          {projectData.map((sub) =>
-                            sub.workspaceId !== item.id ? (
-                              ""
-                            ) : Array.isArray(sub) && sub.length === 0 ? (
-                              <button
-                                key={`${item.id}-new-project-button`}
-                                id={item.id}
-                                className="my-1 mr-[-20px] border-2 border-[#208d8e] text-[#208d8e] rounded-lg p-1 w-[274px] hover:bg-[#208d8e] hover:text-white"
-                                onClick={() => {
-                                  setModalProOpen(true);
-                                  setId(item.id);
-                                  console.log(item.id);
-                                }}
-                              >
-                                ساختن پروژه جدید
-                              </button>
-                            ) : (
-                              Array.isArray(sub) &&
-                              sub.map((items: ProjectData) => (
+                          {item.projects.length === 0 ? (
+                            <button
+                              id={item.id}
+                              className="my-1 mr-[-20px] border-2 border-[#208d8e] text-[#208d8e] rounded-lg p-1 w-[274px] hover:bg-[#208d8e] hover:text-white"
+                              onClick={() => {
+                                setModalProOpen(true);
+                                setId(item.id);
+                                console.log(item.id);
+                              }}
+                            >
+                              ساختن پروژه جدید
+                            </button>
+                          ) : (
+                            item.projects.map(
+                              (
+                                element: {
+                                  id: React.Key | null | undefined;
+                                  name: string;
+                                },
+                                indexx: any
+                              ) => (
                                 <li
-                                  key={items.id}
+                                  key={element.id}
                                   className="hover:bg-[#FAFAFA] focus:bg-[#e9f9ff] rounded py-2 relative flex items-center justify-between"
                                   onMouseEnter={() =>
-                                    setHoveredSubItem(items.id)
+                                    setHoveredSubItem(element.id as string)
                                   }
                                   onMouseLeave={() => setHoveredSubItem(null)}
                                 >
-                                  {items.name}
+                                  {element.name}
                                   {hoveredItem === item.id &&
-                                    hoveredSubItem === items.id && (
-                                      <button
-                                        className="px-3"
-                                        onClick={() =>
-                                          handleSubItemClick(items)
-                                        }
-                                      >
+                                    hoveredSubItem === element.id && (
+                                      <button className="px-3">
                                         {icons.dots("#323232", "20px")}
                                       </button>
                                     )}
                                 </li>
-                              ))
+                              )
                             )
                           )}
                         </ul>

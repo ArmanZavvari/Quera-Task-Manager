@@ -3,32 +3,42 @@ import Button from "../common/button";
 import icons from "../../utils/icons/icons";
 import { workSpaces } from "../../services/workSpaceService";
 import { projects } from "../../services/projectService";
-import { WorkSpacesData, ProjectData } from "../../types/types";
+import { WorkSpacesData } from "../../types/types";
 
 const WorkSpaces: React.FC = () => {
   const [workSpaceData, setWorkSpaceData] = useState<WorkSpacesData[]>([]);
-  const [projectData, setProjectData] = useState<ProjectData[]>([]);
+
   useEffect(() => {
     workSpaces()
       .then((response) => {
-        setWorkSpaceData(response.data);
+        getProjects(response.data);
       })
       .catch((error) => {
         console.error("Error fetching workspaces:", error);
         console.log(error);
       });
-    // projects()
-    //   .then((response) => {
-    //     setProjectData(response.data);
-    //   })
-    //   .catch((error) => {
-    //     console.error("Error fetching projects:", error);
-    //   });
   }, []);
+
+  const getProjects = (workspaces: WorkSpacesData[]) => {
+    const data: WorkSpacesData[] = [];
+    workspaces.map(async (workspace) => {
+      projects(workspace.id)
+        .then((response) => {
+          data.push({ ...workspace, projects: response.data });
+        })
+        .catch((error) => {
+          console.error("Error fetching projects:", error);
+        })
+        .finally(() => {
+          setWorkSpaceData(data);
+        });
+    });
+  };
 
   const handleClickBut = () => {
     console.log("sup");
   };
+
   const hexToRgba = (hex: string, opacity: number) => {
     hex = hex.replace(/^#/, "");
     var r = parseInt(hex.substring(0, 2), 16);
@@ -46,10 +56,9 @@ const WorkSpaces: React.FC = () => {
               {item.name}
             </h2>
             <div className="flex">
-              {projectData.length === 0 ? (
+              {item.projects.length === 0 ? (
                 <button
-                  className={`bt-3 flex items-center gap-x-1 text-base font-extrabold ml-8 rounded-2xl w-[200px] h-[80px] justify-center border-box border-4 border-transparent
-      `}
+                  className={`bt-3 flex items-center gap-x-1 text-base font-extrabold ml-8 rounded-2xl w-[200px] h-[80px] justify-center border-box border-4 border-transparent`}
                   style={{
                     boxShadow: "0px 3px 4px 0px rgba(0,0,0,0.2)",
                     background: `linear-gradient(white, white) padding-box,linear-gradient(249.83deg, ${
@@ -62,15 +71,15 @@ const WorkSpaces: React.FC = () => {
                   <p>ساختن پروژه جدید</p>
                 </button>
               ) : (
-                projectData.map((items, indexx) => (
+                item.projects.map((element: any) => (
                   <Button
-                    key={items.id}
-                    text={items.name}
+                    key={element.id}
+                    text={element.name}
                     onClick={handleClickBut}
                     className="rounded-2xl text-base font-extrabold ml-8"
                     width={"200px"}
                     height={"80px"}
-                    textColor="white"
+                    textColor="black"
                     customStyle={{
                       boxShadow: "0px 3px 4px 0px rgba(0,0,0,0.2)",
                       background: `linear-gradient(249.83deg, ${
