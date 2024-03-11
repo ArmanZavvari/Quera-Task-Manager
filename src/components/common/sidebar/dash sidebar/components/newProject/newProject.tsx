@@ -1,13 +1,16 @@
 import React, { useState } from "react";
 import icons from "../../../../../../utils/icons/icons";
+import { postProjects } from "../../../../../../services/projectService";
 
 interface NewProjectProps {
   modalOpenPro?: boolean;
   handleClose(): void;
+  id: string;
 }
 const NewProject: React.FC<NewProjectProps> = ({
   modalOpenPro,
   handleClose,
+  id,
 }) => {
   const [name, setName] = useState({ name: "" });
 
@@ -22,8 +25,18 @@ const NewProject: React.FC<NewProjectProps> = ({
       handleClose();
     }
   };
-  const handleSubmit = () => {
-    console.log(name.name);
+  const handleSubmit = async () => {
+    const userData = {
+      name: name.name,
+    };
+    try {
+      const result = await postProjects(id, userData);
+      console.log(result);
+    } catch (e) {
+      console.log("Error Occured!");
+      console.log(e);
+    }
+    console.log(userData);
     handleClose();
   };
 
