@@ -16,3 +16,18 @@ export function postWorkSpace(payload:WorkSpacesPost){
         headers: { 'Authorization': `Bearer ${accessToken}` }
     })
 }
+
+export function patchWorkSpace(payload:WorkSpacesPost, id:string){
+    const accessToken = localStorage.getItem("access")
+
+    return http.patch(`workspaces/${id}/`, payload , {
+        headers: { 'Authorization': `Bearer ${accessToken}` }
+    })
+}
+export function deleteWorkSpace(id:string){
+    const accessToken = localStorage.getItem("access")
+
+    return http.delete(`workspaces/${id}/`, {
+        headers: { 'Authorization': `Bearer ${accessToken}` }
+    })
+}

@@ -19,20 +19,18 @@ const WorkSpaces: React.FC = () => {
       });
   }, []);
 
-  const getProjects = (workspaces: WorkSpacesData[]) => {
+  const getProjects = async (workspaces: WorkSpacesData[]) => {
     const data: WorkSpacesData[] = [];
-    workspaces.map(async (workspace) => {
-      projects(workspace.id)
-        .then((response) => {
-          data.push({ ...workspace, projects: response.data });
-        })
-        .catch((error) => {
-          console.error("Error fetching projects:", error);
-        })
-        .finally(() => {
-          setWorkSpaceData(data);
-        });
-    });
+
+    for (const workspace of workspaces) {
+      try {
+        const response = await projects(workspace.id);
+        data.push({ ...workspace, projects: response.data });
+      } catch (error) {
+        console.error("Error fetching projects:", error);
+      }
+    }
+    setWorkSpaceData(data);
   };
 
   const handleClickBut = () => {

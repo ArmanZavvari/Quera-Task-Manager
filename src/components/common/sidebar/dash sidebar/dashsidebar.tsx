@@ -2,9 +2,10 @@ import React, { useEffect, useState } from "react";
 import icons from "../../../../utils/icons/icons";
 import NewWorkSpace from "./components/newWorkSpace/newWorkSpace";
 import NewProject from "./components/newProject/newProject";
-import { ProjectData, WorkSpacesData } from "../../../../types/types";
+import { WorkSpacesData } from "../../../../types/types";
 import { workSpaces } from "../../../../services/workSpaceService";
 import { projects } from "../../../../services/projectService";
+import WorkSpaceDropDown from "./components/workSpaceDrop/wsDropDown";
 
 const Dashsidebar: React.FC = () => {
   const [isListVisible, setListVisible] = useState(true);
@@ -17,7 +18,9 @@ const Dashsidebar: React.FC = () => {
   const [hoveredSubItem, setHoveredSubItem] = useState<string | null>(null);
   const [id, setId] = useState<string>("");
   const [workSpaceData, setWorkSpaceData] = useState<WorkSpacesData[]>([]);
-  const [projectData, setProjectData] = useState<ProjectData[]>([]);
+  const [dropdownOpenState, setDropdownOpenState] = useState<{
+    [key: string]: boolean;
+  }>({});
 
   useEffect(() => {
     workSpaces()
@@ -30,20 +33,18 @@ const Dashsidebar: React.FC = () => {
       });
   }, []);
 
-  const getProjects = (workspaces: WorkSpacesData[]) => {
+  const getProjects = async (workspaces: WorkSpacesData[]) => {
     const data: WorkSpacesData[] = [];
-    workspaces.map(async (workspace) => {
-      projects(workspace.id)
-        .then((response) => {
-          data.push({ ...workspace, projects: response.data });
-        })
-        .catch((error) => {
-          console.error("Error fetching projects:", error);
-        })
-        .finally(() => {
-          setWorkSpaceData(data);
-        });
-    });
+
+    for (const workspace of workspaces) {
+      try {
+        const response = await projects(workspace.id);
+        data.push({ ...workspace, projects: response.data });
+      } catch (error) {
+        console.error("Error fetching projects:", error);
+      }
+    }
+    setWorkSpaceData(data);
   };
 
   const toggleListVisibility = () => {
@@ -61,8 +62,18 @@ const Dashsidebar: React.FC = () => {
     setModalOpen(false);
     setModalProOpen(false);
   };
+
   const handleItemClick = (item: WorkSpacesData) => {
     console.log(`آیتم ${item.name} با شناسه ${item.id} انتخاب شد.`);
+    setId(item.id);
+    setDropdownOpenState((prevState) => ({
+      ...prevState,
+      [item.id]: !prevState[item.id],
+    }));
+  };
+
+  const openNewWorkSpaceModal = () => {
+    setModalOpen(true);
   };
 
   return (
@@ -120,7 +131,7 @@ const Dashsidebar: React.FC = () => {
                       onMouseEnter={() => setHoveredItem(item.id)}
                       onMouseLeave={() => setHoveredItem(null)}
                     >
-                      <div className="flex items-center justify-between gap-[5px] p-1 my-2 hover:bg-[#FAFAFA] rounded">
+                      <div className="flex items-center justify-between gap-[5px] p-1 my-2 hover:bg-[#FAFAFA] rounded relative">
                         <div className="flex items-center gap-[5px]">
                           <span
                             className="w-[15px] h-[15px] rounded-[4px] inline-block"
@@ -137,12 +148,19 @@ const Dashsidebar: React.FC = () => {
                         {hoveredItem === item.id && (
                           <button
                             onClick={() => handleItemClick(item)}
-                            className=" px-2"
+                            className="px-2"
                           >
                             {icons.dots("#323232", "20px")}
                           </button>
                         )}
+                        {dropdownOpenState[item.id] && (
+                          <WorkSpaceDropDown
+                            id={item.id}
+                            openNewWorkSpaceModal={openNewWorkSpaceModal}
+                          />
+                        )}
                       </div>
+
                       {itemVisibility[Number(item.id)] && (
                         <ul className="indent-5">
                           {item.projects.length === 0 ? (

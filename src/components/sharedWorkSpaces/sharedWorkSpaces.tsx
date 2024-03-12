@@ -4,7 +4,14 @@ import ProfilePicture from "../common/profilePicture/profilePicture";
 import SharedSelector from "../common/sharedSelector/sharedSelector";
 import ProjectSelector from "../common/projectSelector/projectSelector";
 
-const ShareWorkSpaceModal: React.FC = () => {
+interface ShareWorkSpaceModalProps {
+  sharedOpen?: boolean;
+  handleCloseShared(): void;
+}
+const ShareWorkSpaceModal: React.FC<ShareWorkSpaceModalProps> = ({
+  sharedOpen,
+  handleCloseShared,
+}) => {
   const [email, setEmail] = useState("");
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
@@ -20,11 +27,17 @@ const ShareWorkSpaceModal: React.FC = () => {
   const handle = () => {
     console.log("option");
   };
-  return (
-    <div className="fixed inset-0 flex flex-col items-center justify-center bg-gray-800 bg-opacity-60 backdrop-blur-[2px] z-10">
+  return sharedOpen ? (
+    <div
+      className=" inset-0 flex flex-col items-center justify-center bg-gray-800 bg-opacity-60 backdrop-blur-[2px]"
+      onClick={handleCloseShared}
+      style={{ zIndex: "100" }}
+    >
       <div className="bg-white p-6 rounded-xl shadow-md w-[547px] flex flex-col justify-center">
         <div className="flex items-center">
-          <button>{icons.close("black", "24px")}</button>
+          <button onClick={handleCloseShared}>
+            {icons.close("black", "24px")}
+          </button>
           <h2 className="text-2xl font-extrabold w-full text-center mr-[-30px]">
             اشتراک‌گذاری ورک‌اسپیس‌
           </h2>
@@ -110,7 +123,7 @@ const ShareWorkSpaceModal: React.FC = () => {
         </div>
       </div>
     </div>
-  );
+  ) : null;
 };
 
 export default ShareWorkSpaceModal;
