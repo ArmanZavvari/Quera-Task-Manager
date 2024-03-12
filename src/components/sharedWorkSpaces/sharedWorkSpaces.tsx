@@ -6,11 +6,11 @@ import ProjectSelector from "../common/projectSelector/projectSelector";
 
 interface ShareWorkSpaceModalProps {
   sharedOpen?: boolean;
-  handleCloseShared(): void;
+  handleClose(): void;
 }
 const ShareWorkSpaceModal: React.FC<ShareWorkSpaceModalProps> = ({
   sharedOpen,
-  handleCloseShared,
+  handleClose,
 }) => {
   const [email, setEmail] = useState("");
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -27,18 +27,22 @@ const ShareWorkSpaceModal: React.FC<ShareWorkSpaceModalProps> = ({
   const handle = () => {
     console.log("option");
   };
+  const handleOverlayClick = (
+    e: React.MouseEvent<HTMLDivElement, MouseEvent>
+  ) => {
+    if (e.target === e.currentTarget) {
+      handleClose();
+    }
+  };
   return sharedOpen ? (
     <div
-      className=" inset-0 flex flex-col items-center justify-center bg-gray-800 bg-opacity-60 backdrop-blur-[2px]"
-      onClick={handleCloseShared}
-      style={{ zIndex: "100" }}
+      className="fixed inset-0 flex flex-col items-center justify-center bg-gray-800 bg-opacity-60 backdrop-blur-[2px] z-10"
+      onClick={handleOverlayClick}
     >
       <div className="bg-white p-6 rounded-xl shadow-md w-[547px] flex flex-col justify-center">
-        <div className="flex items-center">
-          <button onClick={handleCloseShared}>
-            {icons.close("black", "24px")}
-          </button>
-          <h2 className="text-2xl font-extrabold w-full text-center mr-[-30px]">
+        <div className="flex items-center gap-x-[105px]">
+          <button onClick={handleClose}>{icons.close("black", "24px")}</button>
+          <h2 className="text-2xl font-extrabold  text-center ">
             اشتراک‌گذاری ورک‌اسپیس‌
           </h2>
         </div>

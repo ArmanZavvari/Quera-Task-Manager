@@ -6,17 +6,26 @@ import { WorkSpacesData } from "../../../../types/types";
 import { workSpaces } from "../../../../services/workSpaceService";
 import { projects } from "../../../../services/projectService";
 import WorkSpaceDropDown from "./components/workSpaceDrop/wsDropDown";
+import ShareWorkSpaceModal from "../../../sharedWorkSpaces/sharedWorkSpaces";
+import UpdateNameWS from "./components/updateNameWS/updateNameWS";
+import UpdateColorWS from "./components/updateColorWS/updateColorWS";
 
 const Dashsidebar: React.FC = () => {
   const [isListVisible, setListVisible] = useState(true);
   const [modalOpen, setModalOpen] = useState(false);
+  const [modalUpdateWS, setModalUpdateWS] = useState(false);
+  const [modalUpdateColorWS, setModalUpdateColorWS] = useState(false);
+
   const [modalOpenPro, setModalProOpen] = useState(false);
   const [hoveredItem, setHoveredItem] = useState<string | null>(null);
+  const [sharedOpen, setSharedOpen] = useState(false);
   const [itemVisibility, setItemVisibility] = useState<{
     [key: number]: boolean;
   }>({});
   const [hoveredSubItem, setHoveredSubItem] = useState<string | null>(null);
   const [id, setId] = useState<string>("");
+  const [idName, setIdName] = useState<string>("");
+
   const [workSpaceData, setWorkSpaceData] = useState<WorkSpacesData[]>([]);
   const [dropdownOpenState, setDropdownOpenState] = useState<{
     [key: string]: boolean;
@@ -61,19 +70,28 @@ const Dashsidebar: React.FC = () => {
   const handleCloseModal = () => {
     setModalOpen(false);
     setModalProOpen(false);
+    setSharedOpen(false);
+    setModalUpdateWS(false);
+    setModalUpdateColorWS(false);
   };
-
+  const openShared = () => {
+    setSharedOpen(true);
+  };
   const handleItemClick = (item: WorkSpacesData) => {
     console.log(`آیتم ${item.name} با شناسه ${item.id} انتخاب شد.`);
     setId(item.id);
+    setIdName(item.name);
     setDropdownOpenState((prevState) => ({
       ...prevState,
       [item.id]: !prevState[item.id],
     }));
   };
 
-  const openNewWorkSpaceModal = () => {
-    setModalOpen(true);
+  const openUpdateNameWS = () => {
+    setModalUpdateWS(true);
+  };
+  const openUpdateColorWS = () => {
+    setModalUpdateColorWS(true);
   };
 
   return (
@@ -155,8 +173,10 @@ const Dashsidebar: React.FC = () => {
                         )}
                         {dropdownOpenState[item.id] && (
                           <WorkSpaceDropDown
+                            openShared={openShared}
                             id={item.id}
-                            openNewWorkSpaceModal={openNewWorkSpaceModal}
+                            openUpdateNameWS={openUpdateNameWS}
+                            openUpdateNameColorWS={openUpdateColorWS}
                           />
                         )}
                       </div>
@@ -221,6 +241,27 @@ const Dashsidebar: React.FC = () => {
           id={id}
           modalOpenPro={modalOpenPro}
           handleClose={handleCloseModal}
+        />
+      )}
+      {sharedOpen && (
+        <ShareWorkSpaceModal
+          sharedOpen={sharedOpen}
+          handleClose={handleCloseModal}
+        />
+      )}
+      {modalUpdateWS && (
+        <UpdateNameWS
+          modalUpdateWS={modalUpdateWS}
+          handleClose={handleCloseModal}
+          id={id}
+        />
+      )}
+      {modalUpdateColorWS && (
+        <UpdateColorWS
+          modalUpdateColorWS={modalUpdateColorWS}
+          handleClose={handleCloseModal}
+          id={id}
+          name={idName}
         />
       )}
     </>

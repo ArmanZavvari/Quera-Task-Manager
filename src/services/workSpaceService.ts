@@ -1,4 +1,4 @@
-import { WorkSpacesPost } from "../types/types";
+import { WorkSpacesPost, WorkSpacesPut } from "../types/types";
 import http from "./httpService";
 
 
@@ -28,6 +28,13 @@ export function deleteWorkSpace(id:string){
     const accessToken = localStorage.getItem("access")
 
     return http.delete(`workspaces/${id}/`, {
+        headers: { 'Authorization': `Bearer ${accessToken}` }
+    })
+}
+export function putWorkSpace(payload:WorkSpacesPut, id:string){
+    const accessToken = localStorage.getItem("access")
+
+    return http.put(`workspaces/${id}/`, payload , {
         headers: { 'Authorization': `Bearer ${accessToken}` }
     })
 }
