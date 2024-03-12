@@ -7,6 +7,7 @@ export function taskGet(
   boardId: number
 ) {
   const accessToken = localStorage.getItem("access");
+
   return http.get(
     `workspaces/${workspaceId}/projects/${projectId}/boards/${boardId}/tasks/`,
     {

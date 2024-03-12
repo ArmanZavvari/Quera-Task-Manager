@@ -73,3 +73,7 @@ export interface TaskData {
   members: any[];
   created_at: string;
 }
+export type Project = {
+  id: string;
+  name: string;
+};

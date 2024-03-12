@@ -1,31 +1,30 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import icons from "../../utils/icons/icons";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import Card from "../task/task";
-import ReactDOM from "react-dom";
+import config from "../../config.json";
+import { useParams } from "react-router-dom";
+import axios from "axios";
 
 function BoardView() {
-  const [state, setState] = useState([
-    getItems(3),
-    getItems(1),
-    getItems(1),
-    getItems(1),
-    getItems(1),
-    getItems(1),
-  ]);
+  const { wid, pid } = useParams();
+  const [borads, setBorads] = useState([]);
+  const [state, setState] = useState([]);
 
-  // useEffect(() => {
-  //   const container = document.getElementById("root");
-  //   ReactDOM.render(<BoardView />, container);
-  // }, []);
+  useEffect(() => {
+    const accessToken = localStorage.getItem("access");
 
-  // fake data generator
-  function getItems(count, offset = 0) {
-    return Array.from({ length: count }, (_, k) => ({
-      id: `item-${k + offset}-${new Date().getTime()}`,
-      content: <Card />, // Render your Card component here instead of fake data
-    }));
-  }
+    axios
+      .get(config.apiUrl + `/workspaces/${wid}/projects/${pid}/boards/`, {
+        headers: { Authorization: `Bearer ${accessToken}` },
+      })
+      .then((response) => {
+        setBorads(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
   function reorder(list, startIndex, endIndex) {
     const result = Array.from(list);
@@ -93,158 +92,44 @@ function BoardView() {
   return (
     <div dir="rtl" className="flex gap-5">
       <DragDropContext onDragEnd={onDragEnd}>
-        {/* First column - Open */}
         <Droppable droppableId="0">
-          {(provided) => (
-            <div
-              {...provided.droppableProps}
-              ref={provided.innerRef}
-              className="flex flex-col items-center"
-            >
-              <div className="flex items-center justify-between w-[250px] h-[40px] font-bold  border border-t-[3px] rounded-2xl border-t-[#FD7E14] border-[#D2D6DC] my-4 px-2">
-                <p>Open</p>
-                <div className="flex items-center">
-                  {icons.dots("#323232", "24px")}
-                  {icons.plus("#323232", "24px")}
+          {(provided) =>
+            borads.map((board) => {
+              return (
+                <div
+                  {...provided.droppableProps}
+                  ref={provided.innerRef}
+                  className="flex flex-col items-center"
+                >
+                  <div className="flex items-center justify-between w-[250px] h-[40px] font-bold  border border-t-[3px] rounded-2xl border-t-[#FD7E14] border-[#D2D6DC] my-4 px-2">
+                    <p>{board.name}</p>
+                    <div className="flex items-center">
+                      {icons.dots("#323232", "24px")}
+                      {icons.plus("#323232", "24px")}
+                    </div>
+                  </div>
+                  {board.tasks.map((item, index) => (
+                    <Draggable
+                      key={item.id}
+                      draggableId={item.id}
+                      index={index}
+                    >
+                      {(provided) => (
+                        <div
+                          {...provided.draggableProps}
+                          {...provided.dragHandleProps}
+                          ref={provided.innerRef}
+                        >
+                          <Card {...item} />
+                        </div>
+                      )}
+                    </Draggable>
+                  ))}
+                  {provided.placeholder}
                 </div>
-              </div>
-              {/* Draggable Card for the first column */}
-              {state[0].map((item, index) => (
-                <Draggable key={item.id} draggableId={item.id} index={index}>
-                  {(provided) => (
-                    <div
-                      {...provided.draggableProps}
-                      {...provided.dragHandleProps}
-                      ref={provided.innerRef}
-                    >
-                      {item.content}
-                    </div>
-                  )}
-                </Draggable>
-              ))}
-              {provided.placeholder}
-            </div>
-          )}
-        </Droppable>
-
-        {/* Second column - In Progress */}
-        <Droppable droppableId="1">
-          {(provided) => (
-            <div
-              {...provided.droppableProps}
-              ref={provided.innerRef}
-              className="flex flex-col items-center"
-            >
-              <div className="flex items-center justify-between w-[250px] h-[40px] font-bold  border border-t-[3px] rounded-2xl border-t-[#4C6EF5] border-[#D2D6DC] my-4 px-2">
-                <p>In Progress</p>
-              </div>
-              {/* Draggable Card for the second column */}
-              {state[1].map((item, index) => (
-                <Draggable key={item.id} draggableId={item.id} index={index}>
-                  {(provided) => (
-                    <div
-                      {...provided.draggableProps}
-                      {...provided.dragHandleProps}
-                      ref={provided.innerRef}
-                    >
-                      {item.content}
-                    </div>
-                  )}
-                </Draggable>
-              ))}
-              {provided.placeholder}
-            </div>
-          )}
-        </Droppable>
-
-        {/* third column - Pending */}
-        <Droppable droppableId="2">
-          {(provided) => (
-            <div
-              {...provided.droppableProps}
-              ref={provided.innerRef}
-              className="flex flex-col items-center"
-            >
-              <div className="flex items-center justify-between w-[250px] h-[40px] font-bold  border border-t-[3px] rounded-2xl border-t-[#FAB005] border-[#D2D6DC] my-4 px-2">
-                <p>In Progress</p>
-              </div>
-              {/* Draggable Card for the third column */}
-              {state[2].map((item, index) => (
-                <Draggable key={item.id} draggableId={item.id} index={index}>
-                  {(provided) => (
-                    <div
-                      {...provided.draggableProps}
-                      {...provided.dragHandleProps}
-                      ref={provided.innerRef}
-                    >
-                      {item.content}
-                    </div>
-                  )}
-                </Draggable>
-              ))}
-              {provided.placeholder}
-            </div>
-          )}
-        </Droppable>
-
-        {/* fourth column - To Do */}
-        <Droppable droppableId="3">
-          {(provided) => (
-            <div
-              {...provided.droppableProps}
-              ref={provided.innerRef}
-              className="flex flex-col items-center"
-            >
-              <div className="flex items-center justify-between w-[250px] h-[40px] font-bold  border border-t-[3px] rounded-2xl border-t-[#FD7E14] border-[#D2D6DC] my-4 px-2">
-                <p>To Do</p>
-              </div>
-              {/* Draggable Card for the fourth column */}
-              {state[3].map((item, index) => (
-                <Draggable key={item.id} draggableId={item.id} index={index}>
-                  {(provided) => (
-                    <div
-                      {...provided.draggableProps}
-                      {...provided.dragHandleProps}
-                      ref={provided.innerRef}
-                    >
-                      {item.content}
-                    </div>
-                  )}
-                </Draggable>
-              ))}
-              {provided.placeholder}
-            </div>
-          )}
-        </Droppable>
-
-        {/* fifth column - Done */}
-        <Droppable droppableId="4">
-          {(provided) => (
-            <div
-              {...provided.droppableProps}
-              ref={provided.innerRef}
-              className="flex flex-col items-center"
-            >
-              <div className="flex items-center justify-between w-[250px] h-[40px] font-bold  border border-t-[3px] rounded-2xl border-t-[#40C057] border-[#D2D6DC] my-4 px-2">
-                <p>Done</p>
-              </div>
-              {/* Draggable Card for the fifth column */}
-              {state[4].map((item, index) => (
-                <Draggable key={item.id} draggableId={item.id} index={index}>
-                  {(provided) => (
-                    <div
-                      {...provided.draggableProps}
-                      {...provided.dragHandleProps}
-                      ref={provided.innerRef}
-                    >
-                      {item.content}
-                    </div>
-                  )}
-                </Draggable>
-              ))}
-              {provided.placeholder}
-            </div>
-          )}
+              );
+            })
+          }
         </Droppable>
       </DragDropContext>
     </div>
