@@ -7,6 +7,7 @@ interface WorkSpaceDropDownProps {
   id: string;
   openShared: () => void;
   openUpdateNameColorWS: () => void;
+  openProject: () => void;
 }
 
 const WorkSpaceDropDown: React.FC<WorkSpaceDropDownProps> = ({
@@ -14,9 +15,13 @@ const WorkSpaceDropDown: React.FC<WorkSpaceDropDownProps> = ({
   id,
   openShared,
   openUpdateNameColorWS,
+  openProject,
 }) => {
   const handleOpenSharedWork = () => {
     openShared();
+  };
+  const handleOpenProject = () => {
+    openProject();
   };
 
   const handleDelete = async () => {
@@ -33,7 +38,10 @@ const WorkSpaceDropDown: React.FC<WorkSpaceDropDownProps> = ({
       <div className="dropdown-content absolute top-10 left-0 bg-white shadow-md p-2 z-30 rounded-lg">
         <ul>
           <li className="py-1 hover:bg-gray-100 cursor-pointer">
-            <button className="flex justify-start items-center gap-2 text-sm font-normal p-1">
+            <button
+              className="flex justify-start items-center gap-2 text-sm font-normal p-1"
+              onClick={handleOpenProject}
+            >
               {icons.plus("black", "20px")}ساختن پروژه جدید
             </button>
           </li>

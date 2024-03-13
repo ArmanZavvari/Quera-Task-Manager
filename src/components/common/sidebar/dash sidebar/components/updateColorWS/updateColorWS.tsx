@@ -46,7 +46,6 @@ const UpdateNameWS: React.FC<UpdateNameWSProps> = ({
   };
   const handleSubmit = async () => {
     const userData = { color: color.color, name: name };
-
     try {
       const result = await putWorkSpace(userData, id);
       console.log(result);

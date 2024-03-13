@@ -40,7 +40,7 @@ const Dashsidebar: React.FC = () => {
         console.error("Error fetching workspaces:", error);
         console.log(error);
       });
-  }, []);
+  }, [workSpaceData]);
 
   const getProjects = async (workspaces: WorkSpacesData[]) => {
     const data: WorkSpacesData[] = [];
@@ -85,6 +85,9 @@ const Dashsidebar: React.FC = () => {
       ...prevState,
       [item.id]: !prevState[item.id],
     }));
+  };
+  const openProject = () => {
+    setModalProOpen(true);
   };
 
   const openUpdateNameWS = () => {
@@ -177,6 +180,7 @@ const Dashsidebar: React.FC = () => {
                             id={item.id}
                             openUpdateNameWS={openUpdateNameWS}
                             openUpdateNameColorWS={openUpdateColorWS}
+                            openProject={openProject}
                           />
                         )}
                       </div>
