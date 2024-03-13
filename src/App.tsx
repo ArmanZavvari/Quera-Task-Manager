@@ -5,7 +5,6 @@ import Forgotmsg from "./components/forgotmsg/forgotmsg";
 import AuthLayout from "./components/layout/authLayout.tsx/AuthLayout";
 import Register from "./components/register/register";
 import Dashboard from "./components/layout/dashboard/dashboard";
-import Card from "./components/task/task";
 import Calendar from "./components/dashboardCalendar/dashboardCalendar";
 import WorkSpaces from "./components/workSpaces/workSpaces";
 import PersonalInf from "./components/profilePage/personal-information/personalinf";
@@ -15,6 +14,7 @@ import LoginForm from "./components/loginForm/liginform";
 import ListComponent from "./components/list/list";
 import BoardView from "./components/boardView/boardView";
 import Filter from "./components/filter/filter";
+import Card from "./components/task/task";
 
 const dummyHandleFilterClose = () => {};
 export default function App() {
@@ -87,7 +87,10 @@ export default function App() {
           <Route path="calendar" element={<Calendar />} />
           <Route path="workspaces" element={<WorkSpaces />} />
           <Route path="listview" element={<ListComponent />} />
-          <Route path="boardview" element={<BoardView />} />
+          <Route
+            path="boardview/:wid?/projects/:pid?/"
+            element={<BoardView />}
+          />
         </Route>
         <Route path="/profile" element={<Dashboard />}>
           <Route path="/profile" element={<PersonalInf />} />

@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import Button from "../common/button";
 import icons from "../../utils/icons/icons";
 import { workSpaces } from "../../services/workSpaceService";
 import { projects } from "../../services/projectService";
-import { WorkSpacesData } from "../../types/types";
+import { Project, WorkSpacesData } from "../../types/types";
+import LinkButton from "../common/button/linkButton";
 
 const WorkSpaces: React.FC = () => {
   const [workSpaceData, setWorkSpaceData] = useState<WorkSpacesData[]>([]);
@@ -19,20 +19,18 @@ const WorkSpaces: React.FC = () => {
       });
   }, []);
 
-  const getProjects = (workspaces: WorkSpacesData[]) => {
+  const getProjects = async (workspaces: WorkSpacesData[]) => {
     const data: WorkSpacesData[] = [];
-    workspaces.map(async (workspace) => {
-      projects(workspace.id)
-        .then((response) => {
-          data.push({ ...workspace, projects: response.data });
-        })
-        .catch((error) => {
-          console.error("Error fetching projects:", error);
-        })
-        .finally(() => {
-          setWorkSpaceData(data);
-        });
-    });
+
+    for (const workspace of workspaces) {
+      try {
+        const response = await projects(workspace.id);
+        data.push({ ...workspace, projects: response.data });
+      } catch (error) {
+        console.error("Error fetching projects:", error);
+      }
+    }
+    setWorkSpaceData(data);
   };
 
   const handleClickBut = () => {
@@ -71,8 +69,10 @@ const WorkSpaces: React.FC = () => {
                   <p>ساختن پروژه جدید</p>
                 </button>
               ) : (
-                item.projects.map((element: any) => (
-                  <Button
+                item.projects.map((element: Project) => (
+                  <LinkButton
+                    workspaceId={item.id}
+                    projectId={element.id}
                     key={element.id}
                     text={element.name}
                     onClick={handleClickBut}

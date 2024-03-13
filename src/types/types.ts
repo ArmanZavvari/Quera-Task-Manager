@@ -46,7 +46,7 @@ export interface WorkSpacesData {
   id: string;
   name: string;
   color: string;
-  projects:any;
+  projects: any;
 }
 export interface WorkSpacesPost {
   name: string;
@@ -60,3 +60,20 @@ export interface ProjectData {
 export interface ProjectPost {
   name: string;
 }
+
+export interface TaskData {
+  id: number;
+  name: string;
+  description: string;
+  deadline: string;
+  priority: number;
+  attachment: string;
+  thumbnail: string;
+  order: number;
+  members: any[];
+  created_at: string;
+}
+export type Project = {
+  id: string;
+  name: string;
+};
