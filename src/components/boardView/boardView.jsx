@@ -24,7 +24,7 @@ function BoardView() {
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  }, [wid, pid]);
 
   function reorder(list, startIndex, endIndex) {
     const result = Array.from(list);

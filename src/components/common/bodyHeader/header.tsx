@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import icons from "../../../utils/icons/icons";
 import { useNavigate } from "react-router-dom";
 import Filter from "../../filter/filter";
+import { useParams } from "react-router-dom";
 
 const BodyHeader = () => {
   const [filterOpen, setFilterOpen] = useState(false);
+  const { wid, pid } = useParams();
   const tasks = [
     {
       id: 1,
@@ -65,17 +67,29 @@ const BodyHeader = () => {
               پروژه اول
             </h2>
             <button
-              onClick={() => navigate("/dashboard/listview")}
+              onClick={() => {
+                if (wid !== undefined && pid !== undefined) {
+                  navigate(`/dashboard/listview/${wid}/projects/${pid}/`);
+                } else {
+                  console.error("Workspace ID or Project ID is undefined");
+                }
+              }}
               className="flex border-l-[1px]  gap-[5px] border-gray-600 pl-4 text-right"
             >
               {icons.list("#323232", "24px")}
               نمایش لیستی
             </button>
             <button
-              onClick={() => navigate("/dashboard/boardview")}
-              className="flex border-l-[1px] gap-[5px] border-gray-600 pl-4 text-right"
+              onClick={() => {
+                if (wid !== undefined && pid !== undefined) {
+                  navigate(`/dashboard/boardview/${wid}/projects/${pid}/`);
+                } else {
+                  console.error("Workspace ID or Project ID is undefined");
+                }
+              }}
+              className="flex border-l-[1px]  gap-[5px] border-gray-600 pl-4 text-right"
             >
-              {icons.grid("#323232", "24px")}
+              {icons.list("#323232", "24px")}
               نمایش ستونی
             </button>
             <button

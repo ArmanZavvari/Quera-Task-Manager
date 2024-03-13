@@ -40,7 +40,7 @@ const Dashsidebar: React.FC = () => {
         console.error("Error fetching workspaces:", error);
         console.log(error);
       });
-  }, [workSpaceData]);
+  }, []);
 
   const getProjects = async (workspaces: WorkSpacesData[]) => {
     const data: WorkSpacesData[] = [];
