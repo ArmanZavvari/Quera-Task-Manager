@@ -52,6 +52,10 @@ export interface WorkSpacesPost {
   name: string;
   color: string;
 }
+export interface WorkSpacesPut {
+  name?: string;
+  color?: string;
+}
 export interface ProjectData {
   id: string;
   name: string;
