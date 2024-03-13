@@ -9,15 +9,18 @@ type FormData = {
   attachment: File | null;
   cover: File | null;
 };
+interface TaskFormProps {
+  modalNewTask: boolean;
+  handleClose: () => void;
+}
 
-const TaskForm: React.FC = () => {
+const TaskForm: React.FC<TaskFormProps> = ({ modalNewTask, handleClose }) => {
   const { register, handleSubmit } = useForm<FormData>();
   const [description, setDescription] = useState("");
   const [projects] = useState(["پروژه ۱", "پروژه ۲"]);
 
   const [selectedUser, setSelectedUser] = useState("");
   const [isOpen, setIsOpen] = useState(false);
-  const [isTaskOpen, setIsTaskOpen] = useState(true);
   const onSubmit: SubmitHandler<FormData> = (data) => {
     console.log(data);
   };
@@ -31,22 +34,27 @@ const TaskForm: React.FC = () => {
   ) => {
     setDescription(event.target.value);
   };
-  const handleCloseTask = () => {
-    setIsTaskOpen(false);
+  const handleOverlayClick = (
+    e: React.MouseEvent<HTMLDivElement, MouseEvent>
+  ) => {
+    if (e.target === e.currentTarget) {
+      handleClose();
+    }
   };
+
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      className="w-[1150px] border rounded-3xl"
-    >
-      {isTaskOpen && (
-        <>
+    <form onSubmit={handleSubmit(onSubmit)} className=" border rounded-3xl">
+      <div
+        className="fixed inset-0 flex flex-col items-center justify-center bg-gray-800 bg-opacity-60 backdrop-blur-[2px] z-10"
+        onClick={handleOverlayClick}
+      >
+        <div className="bg-white py-5 px-10 rounded-xl w-[1150px]  flex flex-col justify-between items-stretch">
           <div className="flex justify-between items-center mx-6 my-6">
             <div className="flex justify-between items-center">
               <span className="bg-gray-300 mx-1 w-[16px] h-[16px] rounded ml-2"></span>
               <h2 className=" text-2xl font-medium">عنوان تسک</h2>
             </div>
-            <button onClick={handleCloseTask}>
+            <button onClick={handleClose}>
               {icons.close("#BDBDBD", "32px")}
             </button>
           </div>
@@ -162,8 +170,8 @@ const TaskForm: React.FC = () => {
               ساختن تسک
             </button>
           </div>
-        </>
-      )}
+        </div>
+      </div>
     </form>
   );
 };
