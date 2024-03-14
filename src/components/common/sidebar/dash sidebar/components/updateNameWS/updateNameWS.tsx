@@ -6,11 +6,15 @@ interface UpdateNameWSProps {
   modalUpdateWS?: boolean;
   handleClose(): void;
   id: string;
+  namee: string;
+  handleChange: () => void;
 }
 const UpdateNameWS: React.FC<UpdateNameWSProps> = ({
   modalUpdateWS,
   handleClose,
   id,
+  namee,
+  handleChange,
 }) => {
   const [name, setName] = useState({ name: "" });
 
@@ -31,6 +35,7 @@ const UpdateNameWS: React.FC<UpdateNameWSProps> = ({
     };
     try {
       const result = await putWorkSpace(userData, id);
+      handleChange();
       console.log(result);
     } catch (e) {
       console.log("Error Occured!");
@@ -53,6 +58,7 @@ const UpdateNameWS: React.FC<UpdateNameWSProps> = ({
         <div>
           <h5 className="mb-1">نام ورک اسپیس</h5>
           <input
+            defaultValue={namee}
             type="text"
             onChange={handleInput}
             className="border border-gray-400 rounded-md px-3 py-2 mb-8 w-full"

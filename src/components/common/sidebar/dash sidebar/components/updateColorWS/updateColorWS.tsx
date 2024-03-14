@@ -7,12 +7,14 @@ interface UpdateNameWSProps {
   handleClose(): void;
   id: string;
   name: string;
+  handleChange: () => void;
 }
 const UpdateNameWS: React.FC<UpdateNameWSProps> = ({
   modalUpdateColorWS,
   handleClose,
   id,
   name,
+  handleChange,
 }) => {
   const colors = [
     "#4C6EF5",
@@ -48,6 +50,7 @@ const UpdateNameWS: React.FC<UpdateNameWSProps> = ({
     const userData = { color: color.color, name: name };
     try {
       const result = await putWorkSpace(userData, id);
+      handleChange();
       console.log(result);
     } catch (e) {
       console.log("Error Occured!");

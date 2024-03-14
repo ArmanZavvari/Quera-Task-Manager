@@ -8,6 +8,7 @@ import { postWorkSpace } from "../../../../../../services/workSpaceService";
 interface NewWorkSpaceProps {
   modalOpen?: boolean;
   handleClose(): void;
+  handleChange: () => void;
 }
 interface Props {
   data: {
@@ -19,6 +20,7 @@ interface Props {
 const NewWorkSpace: React.FC<NewWorkSpaceProps> = ({
   modalOpen,
   handleClose,
+  handleChange,
 }) => {
   const [data, setData] = useState({ name: "", color: "" });
   const [step, setStep] = useState(0);
@@ -38,6 +40,7 @@ const NewWorkSpace: React.FC<NewWorkSpaceProps> = ({
     };
     try {
       const result = await postWorkSpace(userData);
+      handleChange();
       console.log(result);
     } catch (e) {
       console.log("Error Occured!");
