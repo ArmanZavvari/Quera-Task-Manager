@@ -1,34 +1,26 @@
-import React, { useState } from "react";
+import React from "react";
 import icons from "../../../../../../utils/icons/icons";
-import { deleteWorkSpace } from "../../../../../../services/workSpaceService";
-import ShareWorkSpaceModal from "../../../../../sharedWorkSpaces/sharedWorkSpaces";
-interface WorkSpaceDropDownProps {
-  openUpdateNameWS: () => void;
+import { deleteProjects } from "../../../../../../services/projectService";
+interface ProjectDropDownProps {
+  openTask: () => void;
+  openSharedProject: () => void;
   id: string;
-  openShared: () => void;
-  openUpdateNameColorWS: () => void;
-  openProject: () => void;
+  idP: string;
+  openProjectName: () => void;
   handleChange: () => void;
 }
 
-const WorkSpaceDropDown: React.FC<WorkSpaceDropDownProps> = ({
-  openUpdateNameWS,
+const ProjectDropDown: React.FC<ProjectDropDownProps> = ({
+  openSharedProject,
+  openTask,
   id,
-  openShared,
-  openUpdateNameColorWS,
-  openProject,
+  idP,
+  openProjectName,
   handleChange,
 }) => {
-  const handleOpenSharedWork = () => {
-    openShared();
-  };
-  const handleOpenProject = () => {
-    openProject();
-  };
-
   const handleDelete = async () => {
     try {
-      const result = await deleteWorkSpace(id);
+      const result = await deleteProjects(idP, id);
       handleChange();
       console.log(result);
     } catch (e) {
@@ -43,27 +35,20 @@ const WorkSpaceDropDown: React.FC<WorkSpaceDropDownProps> = ({
           <li className="py-1 hover:bg-gray-100 cursor-pointer">
             <button
               className="flex justify-start items-center gap-2 text-sm font-normal p-1"
-              onClick={handleOpenProject}
+              onClick={openTask}
             >
-              {icons.plus("black", "20px")}ساختن پروژه جدید
+              {icons.plus("black", "20px")}ساختن تسک جدید
             </button>
           </li>
           <li className="py-1 hover:bg-gray-100 cursor-pointer">
             <button
               className="flex justify-start items-center gap-2 text-sm font-normal p-1"
-              onClick={openUpdateNameWS}
+              onClick={openProjectName}
             >
-              {icons.edit("black", "20px")}ویرایش نام ورک اسپیس
+              {icons.edit("black", "20px")}ویرایش نام پروژه
             </button>
           </li>
-          <li className="py-1 hover:bg-gray-100 cursor-pointer">
-            <button
-              className="flex justify-start items-center gap-2 text-sm font-normal p-1"
-              onClick={openUpdateNameColorWS}
-            >
-              {icons.color("black", "20px")}ویرایش رنگ
-            </button>
-          </li>
+
           <li className="py-1 hover:bg-gray-100 cursor-pointer">
             <button className="flex justify-start items-center gap-2 text-sm font-normal p-1">
               {icons.link("black", "20px")}کپی لینک
@@ -80,7 +65,7 @@ const WorkSpaceDropDown: React.FC<WorkSpaceDropDownProps> = ({
           <li className="py-1 cursor-pointer">
             <button
               className="flex justify-start items-center gap-2 text-xs font-normal p-1 py-2 bg-[#208d8e] text-white w-full rounded-lg border border-white hover:bg-white hover:text-[#208d8e] hover:border hover:border-[#208d8e]"
-              onClick={handleOpenSharedWork}
+              onClick={openSharedProject}
             >
               {icons.share("white", "20px")}اشتراک گذاری
             </button>
@@ -91,4 +76,4 @@ const WorkSpaceDropDown: React.FC<WorkSpaceDropDownProps> = ({
   );
 };
 
-export default WorkSpaceDropDown;
+export default ProjectDropDown;

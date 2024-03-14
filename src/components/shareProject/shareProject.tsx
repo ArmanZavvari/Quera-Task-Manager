@@ -3,7 +3,14 @@ import icons from "../../utils/icons/icons";
 import ProfilePicture from "../common/profilePicture/profilePicture";
 import SharedSelector from "../common/sharedSelector/sharedSelector";
 
-const ShareProjectModal: React.FC = () => {
+interface ShareProjectModalProps {
+  handleClose: () => void;
+  sharedProjectOpen?: boolean;
+}
+const ShareProjectModal: React.FC<ShareProjectModalProps> = ({
+  handleClose,
+  sharedProjectOpen,
+}) => {
   const [email, setEmail] = useState("");
 
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -25,11 +32,21 @@ const ShareProjectModal: React.FC = () => {
   const handle = () => {
     console.log("option");
   };
-  return (
-    <div className="fixed inset-0 flex flex-col items-center justify-center bg-gray-800 bg-opacity-60 backdrop-blur-[2px] z-10">
+  const handleOverlayClick = (
+    e: React.MouseEvent<HTMLDivElement, MouseEvent>
+  ) => {
+    if (e.target === e.currentTarget) {
+      handleClose();
+    }
+  };
+  return sharedProjectOpen ? (
+    <div
+      className="fixed inset-0 flex flex-col items-center justify-center bg-gray-800 bg-opacity-60 backdrop-blur-[2px] z-10"
+      onClick={handleOverlayClick}
+    >
       <div className="bg-white p-6 rounded-xl shadow-md w-[470px] flex flex-col justify-center">
         <div className="flex items-center">
-          <button>{icons.close("black", "24px")}</button>
+          <button onClick={handleClose}>{icons.close("black", "24px")}</button>
           <h2 className="text-2xl font-extrabold w-full text-center mr-[-30px]">
             به اشتراک گذاری پروژه
           </h2>
@@ -97,7 +114,7 @@ const ShareProjectModal: React.FC = () => {
         </div>
       </div>
     </div>
-  );
+  ) : null;
 };
 
 export default ShareProjectModal;
