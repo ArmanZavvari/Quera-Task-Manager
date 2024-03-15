@@ -5,11 +5,14 @@ import Card from "../task/task";
 import config from "../../config.json";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import { useDarkMode } from "../common/darkmode/DarkModeContext";
 
 function BoardView() {
   const { wid, pid } = useParams();
   const [borads, setBorads] = useState([]);
   const [state, setState] = useState([]);
+
+  const { darkMode } = useDarkMode();
 
   useEffect(() => {
     const accessToken = localStorage.getItem("access");
@@ -101,7 +104,13 @@ function BoardView() {
                   ref={provided.innerRef}
                   className="flex flex-col items-center"
                 >
-                  <div className="flex items-center justify-between w-[250px] h-[40px] font-bold  border border-t-[3px] rounded-2xl border-t-[#FD7E14] border-[#D2D6DC] my-4 px-2">
+                  <div
+                    className={`flex items-center justify-between w-[250px] h-[40px] font-bold  border border-t-[3px] rounded-2xl border-t-[#FD7E14] border-[#D2D6DC] my-4 px-2 ${
+                      darkMode
+                        ? "border-t-black bg-stone-500 text-white"
+                        : "border-t-[#FD7E14] border-[#D2D6DC]"
+                    } `}
+                  >
                     <p>{board.name}</p>
                     <div className="flex items-center">
                       {icons.dots("#323232", "24px")}

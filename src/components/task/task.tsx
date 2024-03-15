@@ -1,14 +1,18 @@
 import React, { useState } from "react";
 import icons from "../../utils/icons/icons";
 import config from "../../config.json";
+import { useDarkMode } from "../common/darkmode/DarkModeContext";
 
 const Card: React.FC = (item) => {
   const [taskData] = useState<any>(item);
   const [isHovered, setIsHovered] = useState<boolean>(false);
+  const { darkMode } = useDarkMode();
 
   return (
     <div
-      className="w-[249px] bg-white rounded-lg p-4 shadow-md mb-4"
+      className={`w-[249px] bg-white rounded-lg p-4 shadow-md mb-4 ${
+        darkMode ? "bg-stone-500 text-white" : "bg-white"
+      }`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -20,7 +24,11 @@ const Card: React.FC = (item) => {
             className="w-[257px] h-[134px] rounded-md"
           />
         )}
-        <div className="flex flex-col text-right py-2 space-y-2">
+        <div
+          className={`flex flex-col text-right py-2 space-y-2 ${
+            darkMode ? "bg-stone-500 text-white" : "bg-white"
+          }`}
+        >
           <p>{taskData?.name}</p>
           <p>{taskData?.description}</p>
           <div className="flex items-center justify-end">
