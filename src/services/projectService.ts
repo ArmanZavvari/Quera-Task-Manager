@@ -1,5 +1,5 @@
 import http from "./httpService";
-import { ProjectData, ProjectPost } from "../types/types";
+import { ProjectPost } from "../types/types";
 
 export function projects(workSpaceData :string) {
     const accessToken = localStorage.getItem("access");
@@ -15,3 +15,16 @@ export function postProjects(id: string, payload: ProjectPost) {
     });
 }
 
+export function patchProjects(payload: ProjectPost,id: string, idP:string ) {
+    const accessToken = localStorage.getItem("access");
+    return http.patch(`workspaces/${id}/projects/${idP}/`, payload, {
+        headers: { 'Authorization': `Bearer ${accessToken}` }
+    });
+}
+
+export function deleteProjects( idP:string,id: string) {
+    const accessToken = localStorage.getItem("access");
+    return http.delete(`workspaces/${id}/projects/${idP}/`, {
+        headers: { 'Authorization': `Bearer ${accessToken}` }
+    });
+}

@@ -2,34 +2,47 @@ import React, { useEffect, useState } from "react";
 import icons from "../../../../utils/icons/icons";
 import NewWorkSpace from "./components/newWorkSpace/newWorkSpace";
 import NewProject from "./components/newProject/newProject";
-import { WorkSpacesData } from "../../../../types/types";
+import { Project, WorkSpacesData } from "../../../../types/types";
 import { workSpaces } from "../../../../services/workSpaceService";
 import { projects } from "../../../../services/projectService";
 import WorkSpaceDropDown from "./components/workSpaceDrop/wsDropDown";
 import ShareWorkSpaceModal from "../../../sharedWorkSpaces/sharedWorkSpaces";
 import UpdateNameWS from "./components/updateNameWS/updateNameWS";
 import UpdateColorWS from "./components/updateColorWS/updateColorWS";
+import TaskForm from "../../../newTask/newTask";
+import ProjectDropDown from "./components/projectDropDown/projectDropDown";
+import ShareProjectModal from "../../../shareProject/shareProject";
+import UpdateNameProject from "./components/projectNameUpdate/projectNameUpdate";
+import LinkButton from "../../button/linkButton";
 
 const Dashsidebar: React.FC = () => {
   const [isListVisible, setListVisible] = useState(true);
   const [modalOpen, setModalOpen] = useState(false);
   const [modalUpdateWS, setModalUpdateWS] = useState(false);
   const [modalUpdateColorWS, setModalUpdateColorWS] = useState(false);
-
+  const [modalNewTask, setModalNewTask] = useState(false);
   const [modalOpenPro, setModalProOpen] = useState(false);
   const [hoveredItem, setHoveredItem] = useState<string | null>(null);
   const [sharedOpen, setSharedOpen] = useState(false);
+  const [sharedProjectOpen, setSharedProjectOpen] = useState(false);
+  const [modalUpdateNameProject, setModalUpdateNameProject] = useState(false);
+
   const [itemVisibility, setItemVisibility] = useState<{
     [key: number]: boolean;
   }>({});
   const [hoveredSubItem, setHoveredSubItem] = useState<string | null>(null);
   const [id, setId] = useState<string>("");
+  const [idP, setIdP] = useState<string>("");
+  const [idPName, setIdPName] = useState<string>("");
   const [idName, setIdName] = useState<string>("");
-
   const [workSpaceData, setWorkSpaceData] = useState<WorkSpacesData[]>([]);
   const [dropdownOpenState, setDropdownOpenState] = useState<{
     [key: string]: boolean;
   }>({});
+  const [dropdownProjectState, setDropdownProjectState] = useState<{
+    [key: string]: boolean;
+  }>({});
+  const [update, setUpdate] = useState(0);
 
   useEffect(() => {
     workSpaces()
@@ -40,7 +53,11 @@ const Dashsidebar: React.FC = () => {
         console.error("Error fetching workspaces:", error);
         console.log(error);
       });
+<<<<<<< HEAD
   }, []);
+=======
+  }, [update]);
+>>>>>>> 1ce07d396ac729e3dd7b1202a09c0026c59187fa
 
   const getProjects = async (workspaces: WorkSpacesData[]) => {
     const data: WorkSpacesData[] = [];
@@ -73,12 +90,18 @@ const Dashsidebar: React.FC = () => {
     setSharedOpen(false);
     setModalUpdateWS(false);
     setModalUpdateColorWS(false);
+    setModalNewTask(false);
+    setSharedProjectOpen(false);
+    setModalUpdateNameProject(false);
   };
   const openShared = () => {
     setSharedOpen(true);
   };
+  const openSharedProject = () => {
+    setSharedProjectOpen(true);
+  };
   const handleItemClick = (item: WorkSpacesData) => {
-    console.log(`آیتم ${item.name} با شناسه ${item.id} انتخاب شد.`);
+    console.log(`ورک اسپیس ${item.name} با آیدی ${item.id} انتخاب شد.`);
     setId(item.id);
     setIdName(item.name);
     setDropdownOpenState((prevState) => ({
@@ -86,8 +109,14 @@ const Dashsidebar: React.FC = () => {
       [item.id]: !prevState[item.id],
     }));
   };
+  const openProjectName = () => {
+    setModalUpdateNameProject(true);
+  };
   const openProject = () => {
     setModalProOpen(true);
+  };
+  const openTask = () => {
+    setModalNewTask(true);
   };
 
   const openUpdateNameWS = () => {
@@ -95,6 +124,14 @@ const Dashsidebar: React.FC = () => {
   };
   const openUpdateColorWS = () => {
     setModalUpdateColorWS(true);
+  };
+  const handleClickButton = () => {
+    console.log("Clicked");
+  };
+
+  const handleUpdate = () => {
+    const test = update + 1;
+    setUpdate(test);
   };
 
   return (
@@ -181,6 +218,7 @@ const Dashsidebar: React.FC = () => {
                             openUpdateNameWS={openUpdateNameWS}
                             openUpdateNameColorWS={openUpdateColorWS}
                             openProject={openProject}
+                            handleChange={handleUpdate}
                           />
                         )}
                       </div>
@@ -200,32 +238,57 @@ const Dashsidebar: React.FC = () => {
                               ساختن پروژه جدید
                             </button>
                           ) : (
-                            item.projects.map(
-                              (
-                                element: {
-                                  id: React.Key | null | undefined;
-                                  name: string;
-                                },
-                                indexx: any
-                              ) => (
-                                <li
+                            item.projects.map((element: Project) => (
+                              <li
+                                key={element.id}
+                                className="hover:bg-[#FAFAFA] focus:bg-[#e9f9ff] rounded py-2 relative flex items-center justify-between"
+                                onMouseEnter={() =>
+                                  setHoveredSubItem(element.id as string)
+                                }
+                                onMouseLeave={() => setHoveredSubItem(null)}
+                              >
+                                <LinkButton
+                                  workspaceId={item.id}
+                                  projectId={element.id}
                                   key={element.id}
-                                  className="hover:bg-[#FAFAFA] focus:bg-[#e9f9ff] rounded py-2 relative flex items-center justify-between"
-                                  onMouseEnter={() =>
-                                    setHoveredSubItem(element.id as string)
-                                  }
-                                  onMouseLeave={() => setHoveredSubItem(null)}
-                                >
-                                  {element.name}
-                                  {hoveredItem === item.id &&
-                                    hoveredSubItem === element.id && (
-                                      <button className="px-3">
-                                        {icons.dots("#323232", "20px")}
-                                      </button>
-                                    )}
-                                </li>
-                              )
-                            )
+                                  text={element.name}
+                                  textColor="black"
+                                  onClick={handleClickButton}
+                                />
+                                {hoveredItem === item.id &&
+                                  hoveredSubItem === element.id && (
+                                    <button
+                                      className="px-3"
+                                      onClick={() => {
+                                        setIdP(element.id);
+                                        setId(item.id);
+                                        setIdPName(element.name);
+                                        setDropdownProjectState(
+                                          (prevState) => ({
+                                            ...prevState,
+                                            [`${id}_${element.id}`]:
+                                              !prevState[`${id}_${element.id}`],
+                                          })
+                                        );
+                                      }}
+                                    >
+                                      {icons.dots("#323232", "20px")}
+                                    </button>
+                                  )}
+                                {dropdownProjectState[
+                                  `${id}_${element.id}`
+                                ] && (
+                                  <ProjectDropDown
+                                    openProjectName={openProjectName}
+                                    id={id}
+                                    idP={idP}
+                                    openTask={openTask}
+                                    openSharedProject={openSharedProject}
+                                    handleChange={handleUpdate}
+                                  />
+                                )}
+                              </li>
+                            ))
                           )}
                         </ul>
                       )}
@@ -238,13 +301,18 @@ const Dashsidebar: React.FC = () => {
         </div>
       </div>
       {modalOpen && (
-        <NewWorkSpace modalOpen={modalOpen} handleClose={handleCloseModal} />
+        <NewWorkSpace
+          modalOpen={modalOpen}
+          handleClose={handleCloseModal}
+          handleChange={handleUpdate}
+        />
       )}
       {modalOpenPro && (
         <NewProject
           id={id}
           modalOpenPro={modalOpenPro}
           handleClose={handleCloseModal}
+          handleChange={handleUpdate}
         />
       )}
       {sharedOpen && (
@@ -258,6 +326,8 @@ const Dashsidebar: React.FC = () => {
           modalUpdateWS={modalUpdateWS}
           handleClose={handleCloseModal}
           id={id}
+          namee={idName}
+          handleChange={handleUpdate}
         />
       )}
       {modalUpdateColorWS && (
@@ -266,6 +336,25 @@ const Dashsidebar: React.FC = () => {
           handleClose={handleCloseModal}
           id={id}
           name={idName}
+          handleChange={handleUpdate}
+        />
+      )}
+      {modalNewTask && (
+        <TaskForm modalNewTask={modalNewTask} handleClose={handleCloseModal} />
+      )}
+      {sharedProjectOpen && (
+        <ShareProjectModal
+          sharedProjectOpen={sharedProjectOpen}
+          handleClose={handleCloseModal}
+        />
+      )}
+      {modalUpdateNameProject && (
+        <UpdateNameProject
+          id={id}
+          idP={idP}
+          handleClose={handleCloseModal}
+          namee={idPName}
+          handleChange={handleUpdate}
         />
       )}
     </>

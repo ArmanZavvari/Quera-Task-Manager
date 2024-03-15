@@ -1,17 +1,21 @@
 import React, { useState } from "react";
 import icons from "../../../../../../utils/icons/icons";
-import { postProjects } from "../../../../../../services/projectService";
+import { patchProjects } from "../../../../../../services/projectService";
 
-interface NewProjectProps {
-  modalOpenPro?: boolean;
+interface UpdateNameProjectProps {
+  modalUpdateWS?: boolean;
   handleClose(): void;
   id: string;
+  idP: string;
+  namee: string;
   handleChange: () => void;
 }
-const NewProject: React.FC<NewProjectProps> = ({
-  modalOpenPro,
+const UpdateNameProject: React.FC<UpdateNameProjectProps> = ({
+  modalUpdateWS,
   handleClose,
   id,
+  idP,
+  namee,
   handleChange,
 }) => {
   const [name, setName] = useState({ name: "" });
@@ -31,15 +35,15 @@ const NewProject: React.FC<NewProjectProps> = ({
     const userData = {
       name: name.name,
     };
+
     try {
-      const result = await postProjects(id, userData);
+      const result = await patchProjects(userData, id, idP);
       handleChange();
       console.log(result);
     } catch (e) {
       console.log("Error Occured!");
       console.log(e);
     }
-    console.log(userData);
     handleClose();
   };
 
@@ -49,24 +53,25 @@ const NewProject: React.FC<NewProjectProps> = ({
       onClick={handleOverlayClick}
     >
       <div className="bg-white py-5 px-10 rounded-xl w-[501px]  flex flex-col justify-between items-stretch">
-        <div className="flex items-center gap-x-[105px] mb-5">
+        <div className="flex items-center gap-x-[115px] mb-5">
           <button onClick={handleClose}>{icons.close("black", "20px")}</button>
-          <div className="text-2xl font-bold">ساختن پروژه جدید</div>
+          <div className="text-2xl font-bold">ویرایش نام پروژه</div>
         </div>
         <div>
-          <h5 className="mb-1">نام پروژه </h5>
+          <h5 className="mb-1">نام پروژه</h5>
           <input
+            defaultValue={namee}
             type="text"
             onChange={handleInput}
             className="border border-gray-400 rounded-md px-3 py-2 mb-8 w-full"
           />
         </div>
         <button className="button-nws py-[6px] w-full" onClick={handleSubmit}>
-          ساختن پروژه
+          ویرایش نام پروژه
         </button>
       </div>
     </div>
   );
 };
 
-export default NewProject;
+export default UpdateNameProject;
