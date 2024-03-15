@@ -54,10 +54,15 @@ const Dashsidebar: React.FC = () => {
         console.log(error);
       });
 <<<<<<< HEAD
+<<<<<<< HEAD
   }, []);
 =======
   }, [update]);
 >>>>>>> 1ce07d396ac729e3dd7b1202a09c0026c59187fa
+=======
+  }, [update]);
+
+>>>>>>> 1ef12039c64ddb5e72704ae51169f05e6645d05f
 
   const getProjects = async (workspaces: WorkSpacesData[]) => {
     const data: WorkSpacesData[] = [];
