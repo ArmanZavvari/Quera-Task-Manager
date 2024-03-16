@@ -2,10 +2,10 @@ import React from "react";
 
 interface ProfileProps {
   image?: string;
-  firstName: string;
-  lastName: string;
-  imgWidth: string;
-  imgHeight: string;
+  firstName?: string;
+  lastName?: string;
+  imgWidth?: string;
+  imgHeight?: string;
 }
 
 const ProfilePicture: React.FC<ProfileProps> = ({
