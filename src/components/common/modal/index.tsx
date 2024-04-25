@@ -36,7 +36,7 @@ const CustomModal: React.FC<CustomModalProps> = ({
   return (
     <div
       dir="rtl"
-      className="fixed z-20 inset-0 flex justify-center items-center  "
+      className="fixed z-20 inset-0 flex justify-center items-center   "
     >
       <div className="fixed inset-0 bg-gray-800 bg-opacity-70 flex justify-center items-center backdrop-blur-sm">
         <div ref={thirdDivRef} className="bg-white p-4 relative sec_div">
