@@ -1,3 +1,15 @@
+# Quera Task Manager
+
+Below are some image from the site: <br>
+Sign up page : <br>
+![SignUp](https://github.com/ArmanZavvari/Quera-Task-Manager/blob/main1/QueraTaskManagerSignUp.png) <br>
+
+Filter page : <br>
+![Filter](https://github.com/ArmanZavvari/Quera-Task-Manager/blob/main1/QueraTaskManagerFilter.png)<br>
+
+Calender page : <br>
+![Calender](https://github.com/ArmanZavvari/Quera-Task-Manager/blob/main1/QueraTaskManagerCalender.png)<br>
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
